@@ -6,14 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd5a5c37-b62a-4478-a061-c334558512d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Infrastructure/DependencyInjection.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web/Configs/ApiVersioningConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web/Endpoints/EndpointExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web/Endpoints/V1/DebugEndpoints.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Meetline/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Meetline/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web/Endpoints/EndpointExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Endpoints/EndpointExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web/Endpoints/V1/DebugEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Endpoints/V1/DebugEndpoints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web/Endpoints/V2/DebugV2Endpoints.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Web.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +30,6 @@
     <setting file="file://$PROJECT_DIR$/Web/Configs/ApiVersioningConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Web/Configs/OpenApiConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Web/Endpoints/EndpointExtensions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Web/Endpoints/V2/DebugV2Endpoints.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -43,16 +39,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Web: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Web: https.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.Web: http.executor": "Run",
+    ".NET Launch Settings Profile.Web: https.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Web: http">
     <configuration name="Web: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Web/Web.csproj" />
@@ -123,7 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1773356153495</updated>
       <workItem from="1773356154841" duration="9820000" />
-      <workItem from="1773370449102" duration="1839000" />
+      <workItem from="1773370449102" duration="7058000" />
     </task>
     <task id="LOCAL-00001" summary="init: repo init">
       <option name="closed" value="true" />
@@ -157,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773357941806</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: set up API versioning with the X-API-Version header">
+      <option name="closed" value="true" />
+      <created>1773372452587</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1773372452587</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -178,7 +183,8 @@
     <MESSAGE value="clean: remove default http file" />
     <MESSAGE value="feat: add application, domain and infra class library projects" />
     <MESSAGE value="feat: add Scalar as an OpenAPI testing client" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add Scalar as an OpenAPI testing client" />
+    <MESSAGE value="feat: set up API versioning with the X-API-Version header" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: set up API versioning with the X-API-Version header" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
