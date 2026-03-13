@@ -7,10 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fd5a5c37-b62a-4478-a061-c334558512d9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Meetline/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Meetline/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/Endpoints/EndpointExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Endpoints/EndpointExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/Endpoints/V1/DebugEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Endpoints/V1/DebugEndpoints.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/Endpoints/V2/DebugV2Endpoints.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web/Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Web/Web.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1773356153495</updated>
       <workItem from="1773356154841" duration="9820000" />
-      <workItem from="1773370449102" duration="7058000" />
+      <workItem from="1773370449102" duration="12510000" />
     </task>
     <task id="LOCAL-00001" summary="init: repo init">
       <option name="closed" value="true" />
@@ -162,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773372452587</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: clean up debug endpoints, add new Debug-only /api/_debug endpoints">
+      <option name="closed" value="true" />
+      <created>1773379645278</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1773379645278</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,7 +190,8 @@
     <MESSAGE value="feat: add application, domain and infra class library projects" />
     <MESSAGE value="feat: add Scalar as an OpenAPI testing client" />
     <MESSAGE value="feat: set up API versioning with the X-API-Version header" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: set up API versioning with the X-API-Version header" />
+    <MESSAGE value="feat: clean up debug endpoints, add new Debug-only /api/_debug endpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: clean up debug endpoints, add new Debug-only /api/_debug endpoints" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

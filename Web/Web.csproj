@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>1d26f4e7-5af6-4a50-99e2-ebb09aa63139</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,6 +15,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5"/>
         <PackageReference Include="Scalar.AspNetCore" Version="2.13.7"/>
     </ItemGroup>
