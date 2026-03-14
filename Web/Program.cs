@@ -35,9 +35,6 @@ if (app.Environment.IsDevelopment())
     app.MapGroup("/_debug").AllowAnonymous().MapDebugV1Endpoints();
 }
 
-app.MapGet("/public", () => "welcome to a public endpoint").AllowAnonymous();
-app.MapGet("/private", () => "welcome to a private endpoint!");
-
 app.MapEndpoints();
 
 app.Run();
