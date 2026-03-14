@@ -18,7 +18,7 @@ builder.Services.AddAuthorizationBuilder()
         .Build());
 
 builder.Services
-    .AddInfrastructure()
+    .AddInfrastructure(builder.Configuration)
     .AddOpenApi(OpenApiConfiguration.Configure)
     .AddApiVersioning(ApiVersioningConfiguration.Configure);
 
