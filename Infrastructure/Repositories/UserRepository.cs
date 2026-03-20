@@ -12,7 +12,7 @@ public class UserRepository(ApplicationDbContext ctx) : IUserRepository
         return ctx.Users.FindAsync([id], ct).AsTask();
     }
 
-    public Task<Guid?> GetUserExternalIdFromId(string externalId, CancellationToken ct)
+    public Task<Guid?> GetUserIdFromExternalId(string externalId, CancellationToken ct)
     {
         return ctx.Users
             .Where(u => u.ExternalId == externalId)

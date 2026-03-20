@@ -31,7 +31,7 @@ public class GetUserIdByExternalIdHandlerTest
         var query = new GetUserIdByExternalIdQuery(externalId);
 
         _repositoryMock
-            .Setup(repo => repo.GetUserExternalIdFromId(query.ExternalId, It.IsAny<CancellationToken>()))
+            .Setup(repo => repo.GetUserIdFromExternalId(query.ExternalId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(userId);
 
         var result = await _handler.Handle(query, CancellationToken.None);
@@ -52,7 +52,7 @@ public class GetUserIdByExternalIdHandlerTest
         var query = new GetUserIdByExternalIdQuery(externalId);
 
         _repositoryMock
-            .Setup(repo => repo.GetUserExternalIdFromId(query.ExternalId, It.IsAny<CancellationToken>()))
+            .Setup(repo => repo.GetUserIdFromExternalId(query.ExternalId, It.IsAny<CancellationToken>()))
             .ReturnsAsync((Guid?)null);
 
         var result = await _handler.Handle(query, CancellationToken.None);

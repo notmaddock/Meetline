@@ -10,7 +10,7 @@ public class GetUserIdByExternalIdHandler(IUserRepository repository)
     public async ValueTask<Result<GetUserIdByExternalIdResponse>> Handle(GetUserIdByExternalIdQuery query,
         CancellationToken cancellationToken)
     {
-        var id = await repository.GetUserExternalIdFromId(query.ExternalId, cancellationToken);
+        var id = await repository.GetUserIdFromExternalId(query.ExternalId, cancellationToken);
 
         return id is null
             ? Result.Fail(GetUserIdByExternalIdErrors.UserNotFoundError(query.ExternalId))

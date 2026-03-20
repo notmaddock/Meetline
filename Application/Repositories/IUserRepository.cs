@@ -18,5 +18,5 @@ public interface IUserRepository
     /// <param name="externalId">The external ID to query</param>
     /// <param name="ct">The cancellation token</param>
     /// <returns></returns>
-    public Task<Guid?> GetUserExternalIdFromId(string externalId, CancellationToken ct);
+    public Task<Guid?> GetUserIdFromExternalId(string externalId, CancellationToken ct);
 }
