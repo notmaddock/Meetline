@@ -11,6 +11,8 @@ public static class UserEndpoints
     {
         app.MapGet("/me", GetCurrentUser);
         app.MapGet("/{id:guid}", GetUserById);
+
+        // TODO: Onboarding endpoint
     }
 
     private static async Task<IResult> GetCurrentUser(Mediator.Mediator mediator, CurrentUserScope scope)
