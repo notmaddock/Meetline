@@ -20,6 +20,28 @@ public static class OpenApiConfiguration
                 Url = new Uri("https://github.com/SowTag")
             };
 
+            var scheme = new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.Http,
+                Name = "Bearer",
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header
+            };
+
+            document.Components ??= new OpenApiComponents();
+            document.Components.SecuritySchemes ??= new Dictionary<string, IOpenApiSecurityScheme>();
+
+            document.Components.SecuritySchemes.Add("Bearer token", scheme);
+
+            document.Security =
+            [
+                new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecuritySchemeReference("Bearer token", document)] = []
+                }
+            ];
+
             return Task.CompletedTask;
         });
     }
