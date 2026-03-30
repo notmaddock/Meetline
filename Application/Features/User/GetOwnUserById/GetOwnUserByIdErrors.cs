@@ -1,4 +1,5 @@
 using Application.Errors;
+using Application.Features.Generic.User;
 
 namespace Application.Features.User.GetOwnUserById;
 
@@ -6,7 +7,6 @@ public static class GetOwnUserByIdErrors
 {
     public static ApplicationError UserNotFoundError(Guid id)
     {
-        return ApplicationError.Forbidden("User.NotOnboard", "User is not onboard",
-            $"User with ID {id} not found, maybe they're not onboard?");
+        return GenericUserErrors.UserNotFoundPerhapsNotOnboardError(id);
     }
 }

@@ -1,4 +1,5 @@
 using Application.Errors;
+using Application.Features.Generic.User;
 
 namespace Application.Features.User.GetUserIdByExternalId;
 
@@ -6,6 +7,6 @@ public static class GetUserIdByExternalIdErrors
 {
     public static ApplicationError UserNotFoundError(string id)
     {
-        return ApplicationError.NotFound("User.NotFound", "User not found", $"User with external ID {id} not found");
+        return GenericUserErrors.UserNotFoundError(id);
     }
 }
