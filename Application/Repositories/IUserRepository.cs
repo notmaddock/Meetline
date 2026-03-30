@@ -19,4 +19,12 @@ public interface IUserRepository
     /// <param name="ct">The cancellation token</param>
     /// <returns></returns>
     public Task<Guid?> GetUserIdFromExternalId(string externalId, CancellationToken ct);
+
+    /// <summary>
+    ///     Returns whether a user exists or not
+    /// </summary>
+    /// <param name="id">The user's Guid</param>
+    /// <param name="ct">The cancellation token</param>
+    /// <returns>True if the user exists, false otherwise</returns>
+    Task<bool> ExistsAsync(Guid id, CancellationToken ct);
 }

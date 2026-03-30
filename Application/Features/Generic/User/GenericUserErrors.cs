@@ -11,6 +11,16 @@ public class GenericUserErrors
     /// <returns>An ApplicationError explaining the situation</returns>
     public static ApplicationError UserNotFoundError(Guid id)
     {
+        return UserNotFoundError(id.ToString());
+    }
+
+    /// <summary>
+    ///     A generic not found error for User entities
+    /// </summary>
+    /// <param name="id">The user's ID</param>
+    /// <returns>An ApplicationError explaining the situation</returns>
+    public static ApplicationError UserNotFoundError(string id)
+    {
         return ApplicationError.NotFound("User.NotFound", "User not found", $"User with ID {id} not found");
     }
 

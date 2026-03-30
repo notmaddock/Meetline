@@ -19,4 +19,9 @@ public class UserRepository(ApplicationDbContext ctx) : IUserRepository
             .Select(u => (Guid?)u.Id)
             .FirstOrDefaultAsync(ct);
     }
+
+    public Task<bool> ExistsAsync(Guid id, CancellationToken ct)
+    {
+        return ctx.Users.AnyAsync(u => u.Id == id, ct);
+    }
 }
