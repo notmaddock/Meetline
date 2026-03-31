@@ -5,6 +5,7 @@
     <Project Path="Application.Tests/Application.Tests.csproj"/>
     <Project Path="Application/Application.csproj"/>
     <Project Path="Domain/Domain.csproj"/>
+    <Project Path="Infrastructure.Tests/Infrastructure.Tests.csproj"/>
     <Project Path="Infrastructure/Infrastructure.csproj"/>
     <Project Path="Web/Web.csproj"/>
 </Solution>

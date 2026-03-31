@@ -19,5 +19,6 @@ public static class EndpointExtensions
         var api = root.MapGroup("/api").WithApiVersionSet(versionSet);
 
         api.MapGroup("/users").MapUserEndpoints();
+        api.MapGroup("/roles").MapRoleEndpoints();
     }
 }
