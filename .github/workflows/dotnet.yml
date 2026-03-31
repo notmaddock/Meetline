@@ -8,18 +8,45 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    
+    # Required permissions for dorny/test-reporter to create UI checks
+    permissions:
+      contents: read
+      actions: read
+      checks: write
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test and Collect Coverage
+        run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults --collect:"XPlat Code Coverage"
+
+      - name: Publish Test Results to UI
+        uses: dorny/test-reporter@v3
+        if: ${{ !cancelled() }}
+        with:
+          name: .NET Test Results
+          path: ./TestResults/*.trx
+          reporter: dotnet-trx
+
+      - name: Generate Coverage Report
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.5.4
+          with:
+            reports: '**/coverage.cobertura.xml'
+            targetdir: 'coveragereport'
+            reporttypes: 'MarkdownSummaryGithub'
+  
+      - name: Output Coverage to Job Summary
+        run: cat coveragereport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
