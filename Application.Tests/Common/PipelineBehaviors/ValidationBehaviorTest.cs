@@ -59,5 +59,6 @@ public class ValidationBehaviorTest
         nextMock.Verify(n => n(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
-    private record TestCommand : ICommand<Result>, IMessage;
+    // ReSharper disable once MemberCanBePrivate.Global (this is required for Moq)
+    public record TestCommand : ICommand<Result>;
 }
