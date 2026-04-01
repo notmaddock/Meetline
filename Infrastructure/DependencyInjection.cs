@@ -1,7 +1,9 @@
 using Application.Common.Caching;
+using Application.InternalServices;
 using Application.Repositories;
 using Infrastructure.Common.Caching;
 using Infrastructure.Data;
+using Infrastructure.InternalServices;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +18,9 @@ public static class DependencyInjection
         services.AddMemoryCache();
         services.AddScoped<ICacheService, MemoryCacheService>();
 
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddSingleton<ITenantReadService, TenantReadService>();
+
+        services.AddDbContextFactory<ApplicationDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
