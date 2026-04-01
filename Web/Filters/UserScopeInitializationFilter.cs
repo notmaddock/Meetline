@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Application.Features.User.GetUserIdByExternalId;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Web.Configs;
 using Web.Extensions;
 using Web.Scopes;
 
@@ -21,11 +22,14 @@ public class UserScopeInitializationFilter(Mediator.Mediator sender, CurrentUser
 
         if (externalId is null) return ForbidWithOnboardingHeader(context);
 
+        if (!context.HttpContext.Items.TryGetValue(AuthenticationConfig.TenantIdHttpContextKey, out var rawTenantId) ||
+            rawTenantId is not Guid tenantId)
+            return TypedResults.Unauthorized();
 
         var result = await sender.Send(new GetUserIdByExternalIdQuery(externalId));
 
         if (result.IsSuccess)
-            scope.Populate(result.Value.Id, externalId);
+            scope.Populate(result.Value.Id, externalId, tenantId);
         else
             return ForbidWithOnboardingHeader(context);
 
