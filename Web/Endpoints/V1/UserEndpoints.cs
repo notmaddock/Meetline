@@ -19,7 +19,7 @@ public static class UserEndpoints
 
     private static async Task<IResult> GetCurrentUser(Mediator.Mediator mediator, CurrentUserScope scope)
     {
-        var result = await mediator.Send(new GetOwnUserByIdQuery(scope.Id));
+        var result = await mediator.Send(new GetOwnUserByIdQuery(scope.UserId));
 
         return result.IsSuccess ? TypedResults.Ok(result.Value) : result.ToProblemDetails();
     }

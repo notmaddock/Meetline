@@ -4,7 +4,6 @@ using Application.Common.PipelineBehaviors;
 using FluentValidation;
 using Infrastructure;
 using Mediator;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Json;
 using Scalar.AspNetCore;
@@ -23,9 +22,8 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBeh
 
 builder.Services.AddValidatorsFromAssembly(typeof(ICacheService).Assembly);
 
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => { builder.Configuration.GetSection("JwtBearer").Bind(options); });
+
+builder.Services.AddMultiTenantJwtValidation(builder.Configuration);
 
 builder.Services.AddAuthorizationBuilder()
     .SetFallbackPolicy(new AuthorizationPolicyBuilder()
@@ -59,15 +57,15 @@ app.UseExceptionHandler();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi("/api/openapi").AllowAnonymous();
-    app.MapScalarApiReference("/api/scalar", options =>
-    {
-        options.OpenApiRoutePattern = "/api/openapi";
-    }).AllowAnonymous();
+    app.MapScalarApiReference("/api/scalar", options => { options.OpenApiRoutePattern = "/api/openapi"; })
+        .AllowAnonymous();
 
     app.MapGroup("/api/_debug").AllowAnonymous().MapDebugV1Endpoints();
 }
 
 var root = app.MapGroup("").AddEndpointFilter<UserScopeInitializationFilter>();
+
+root.MapGet("api/_debug/authcheck", (CurrentUserScope scope) => Results.Ok((object?)scope));
 
 root.MapEndpoints();
 
