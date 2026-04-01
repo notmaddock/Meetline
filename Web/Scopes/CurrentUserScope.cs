@@ -1,13 +1,18 @@
+using Application.Scopes;
+
 namespace Web.Scopes;
 
-public class CurrentUserScope
+public class CurrentUserScope : ICurrentUserScope
 {
-    public Guid Id { get; private set; }
-    public string ExternalId { get; private set; } = string.Empty;
+    public Guid UserId { get; private set; }
+    public string ExternalUserId { get; private set; } = string.Empty;
 
-    internal void Populate(Guid id, string externalId)
+    public Guid TenantId { get; private set; }
+
+    internal void Populate(Guid id, string externalId, Guid tenantId)
     {
-        Id = id;
-        ExternalId = externalId;
+        UserId = id;
+        ExternalUserId = externalId;
+        TenantId = tenantId;
     }
 }
