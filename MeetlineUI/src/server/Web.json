@@ -1,0 +1,202 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Meetline",
+    "description": "Meetline is an online learning and conferencing app.",
+    "contact": {
+      "name": "Maddock",
+      "url": "https://github.com/SowTag",
+      "email": "sowtag@gmail.com"
+    },
+    "version": "v0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://meetline.maddock.world/"
+    }
+  ],
+  "paths": {
+    "/_debug/endpoints": {
+      "get": {
+        "tags": ["Web"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/me": {
+      "get": {
+        "tags": ["UserEndpoints"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": ["UserEndpoints"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/onboard": {
+      "post": {
+        "tags": ["UserEndpoints"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OnboardUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/roles": {
+      "get": {
+        "tags": ["RoleEndpoints"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["RoleEndpoints"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoleCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/roles/{id}": {
+      "get": {
+        "tags": ["RoleEndpoints"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateRoleCommand": {
+        "required": ["name", "hoist", "position", "permissions"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "hoist": {
+            "type": "boolean"
+          },
+          "position": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": ["integer", "string"],
+            "format": "int32"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionSet"
+          },
+          "cache_keys_to_invalidate": {
+            "type": ["null", "array"],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OnboardUserRequest": {
+        "required": ["username", "email", "first_name", "last_name"],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": ["null", "string"]
+          },
+          "last_name": {
+            "type": ["null", "string"]
+          }
+        }
+      },
+      "PermissionSet": {}
+    },
+    "securitySchemes": {
+      "Bearer token": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer token": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Web"
+    },
+    {
+      "name": "UserEndpoints"
+    },
+    {
+      "name": "RoleEndpoints"
+    }
+  ]
+}

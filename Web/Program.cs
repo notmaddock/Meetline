@@ -58,10 +58,13 @@ app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi().AllowAnonymous();
-    app.MapScalarApiReference().AllowAnonymous();
+    app.MapOpenApi("/api/openapi").AllowAnonymous();
+    app.MapScalarApiReference("/api/scalar", options =>
+    {
+        options.OpenApiRoutePattern = "/api/openapi";
+    }).AllowAnonymous();
 
-    app.MapGroup("/_debug").AllowAnonymous().MapDebugV1Endpoints();
+    app.MapGroup("/api/_debug").AllowAnonymous().MapDebugV1Endpoints();
 }
 
 var root = app.MapGroup("").AddEndpointFilter<UserScopeInitializationFilter>();
