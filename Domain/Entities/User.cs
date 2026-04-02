@@ -2,7 +2,7 @@ using Domain.Abstractions;
 
 namespace Domain.Entities;
 
-public class User : AuditableEntity
+public class User : AuditableTenantOwned
 {
     public Guid Id { get; init; }
 

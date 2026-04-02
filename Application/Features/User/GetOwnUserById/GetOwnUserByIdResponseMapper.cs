@@ -6,5 +6,6 @@ namespace Application.Features.User.GetOwnUserById;
 public partial class GetOwnUserByIdResponseMapper
 {
     [MapperIgnoreSource(nameof(Domain.Entities.User.ExternalId))]
+    [MapperIgnoreSource(nameof(Domain.Entities.User.TenantId))]
     public partial GetOwnUserByIdResponse ToResponse(Domain.Entities.User user);
 }

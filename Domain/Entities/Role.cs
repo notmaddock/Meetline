@@ -3,7 +3,7 @@ using Domain.Wrappers;
 
 namespace Domain.Entities;
 
-public class Role : AuditableEntity
+public class Role : AuditableTenantOwned
 {
     public Guid Id { get; init; }
 
