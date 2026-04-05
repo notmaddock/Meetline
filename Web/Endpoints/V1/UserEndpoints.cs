@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Application.Features.User.DTOs.CreateUserRequest;
 using Application.Features.User.DTOs.UserPublicResponse;
 using Application.Features.User.DTOs.UserResponse;
+using Application.Features.User.GetEmailAvailability;
 using Application.Features.User.GetOwnUserById;
 using Application.Features.User.GetUserById;
 using Application.Features.User.GetUsernameAvailability;
@@ -44,6 +45,26 @@ public static class UserEndpoints
             .WithSummary("Check the availability of a username")
             .WithDescription(
                 "Checks whether a username is available or not, to be used with a frontend's input field");
+
+        users.MapGet("/availability", GetEmailAvailability)
+            .AllowNonRegistered()
+            .WithName("EmailAvailability")
+            .WithSummary("Check the availability of an email")
+            .WithDescription(
+                "Checks whether an email is available or not, to be used with a frontend's input field");
+    }
+
+    private static async Task<Results<Ok<GetEmailAvailabilityResponse>, ProblemHttpResult>> GetEmailAvailability(
+        Mediator.Mediator mediator, string email)
+    {
+        var result = await mediator.Send(new GetEmailAvailabilityQuery
+        {
+            Email = email
+        });
+
+        return result.IsSuccess
+            ? TypedResults.Ok(result.Value)
+            : result.ToProblemHttpResult();
     }
 
     private static async Task<Results<Ok<GetUsernameAvailabilityResponse>, ProblemHttpResult>> GetUsernameAvailability(

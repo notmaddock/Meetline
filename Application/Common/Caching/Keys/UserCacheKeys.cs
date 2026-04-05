@@ -21,4 +21,9 @@ public static class UserCacheKeys
     {
         return $"users:username-available:{username}";
     }
+
+    public static string EmailAvailability(string email)
+    {
+        return $"users:email-available:{email}";
+    }
 }

@@ -34,7 +34,15 @@ public interface IUserRepository
     /// <param name="username">The user's username</param>
     /// <param name="ct">The cancellation token</param>
     /// <returns>True if the user exists, false otherwise</returns>
-    Task<bool> ExistsAsync(string username, CancellationToken ct);
+    Task<bool> ExistsByUsernameAsync(string username, CancellationToken ct);
+
+    /// <summary>
+    ///     Returns whether a user exists or not based on their email
+    /// </summary>
+    /// <param name="email">The user's email</param>
+    /// <param name="ct">The cancellation token</param>
+    /// <returns>True if the user exists, false otherwise</returns>
+    Task<bool> ExistsByEmailAsync(string email, CancellationToken ct);
 
     /// <summary>
     ///     Creates a user
