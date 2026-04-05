@@ -6,6 +6,11 @@ public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
 {
     public CreateUserRequestValidator()
     {
-        Console.WriteLine("Validating create user req");
+        RuleFor(x => x.Email)
+            .NotEmpty().WithMessage("Email is required")
+            .EmailAddress().WithMessage("Email must be a valid email address");
+
+        RuleFor(x => x.Username)
+            .NotEmpty().WithMessage("Username is required");
     }
 }

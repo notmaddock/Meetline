@@ -6,10 +6,10 @@ public class User : AuditableEntity
 {
     public Guid Id { get; init; }
 
-    public string ExternalId { get; init; } = null!;
+    public required string ExternalId { get; init; }
 
-    public string Username { get; set; } = null!;
-    public string Email { get; set; } = null!;
+    public required string Username { get; set; }
+    public required string Email { get; set; }
 
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
