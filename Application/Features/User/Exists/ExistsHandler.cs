@@ -1,3 +1,4 @@
+using Application.Features.Generic.User;
 using Application.Repositories;
 using FluentResults;
 using Mediator;
@@ -10,6 +11,6 @@ public class ExistsHandler(IUserRepository repository) : IQueryHandler<ExistsQue
     {
         var exists = await repository.ExistsAsync(query.Id, cancellationToken);
 
-        return exists ? Result.Ok() : Result.Fail(ExistsErrors.UserNotFoundError(query.Id));
+        return exists ? Result.Ok() : Result.Fail(GenericUserErrors.UserNotFoundError(query.Id));
     }
 }

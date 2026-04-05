@@ -18,14 +18,14 @@ public static class RoleEndpoints
     {
         var result = await mediator.Send(new GetRolesQuery());
 
-        return result.IsSuccess ? TypedResults.Ok(result.Value) : result.ToProblemDetails();
+        return result.IsSuccess ? TypedResults.Ok(result.Value) : result.ToProblemHttpResult();
     }
 
     private static async Task<IResult> GetRoleById(Mediator.Mediator mediator, Guid id)
     {
         var result = await mediator.Send(new GetRoleByIdQuery(id));
 
-        return result.IsSuccess ? TypedResults.Ok(result.Value) : result.ToProblemDetails();
+        return result.IsSuccess ? TypedResults.Ok(result.Value) : result.ToProblemHttpResult();
     }
 
     private static async Task<IResult> CreateRole(Mediator.Mediator mediator, CreateRoleCommand command)
@@ -34,6 +34,6 @@ public static class RoleEndpoints
 
         return result.IsSuccess
             ? TypedResults.Created($"/api/roles/{result.Value}", result.Value)
-            : result.ToProblemDetails();
+            : result.ToProblemHttpResult();
     }
 }

@@ -35,4 +35,14 @@ public class GenericUserErrors
         return ApplicationError.Forbidden("User.NotOnboard", "User is not onboard",
             $"User with ID {id} not found, maybe they're not onboard?");
     }
+
+    /// <summary>
+    ///     A generic conflict error for User entities for when an onboarding operation is attempted on an already onboard user
+    /// </summary>
+    /// <returns>An ApplicationError explaining the situation</returns>
+    public static ApplicationError UserAlreadyOnboardError()
+    {
+        return ApplicationError.Conflict("User.AlreadyOnboard", "User already onboard",
+            "The user is already onboard and cannot be onboarded again.");
+    }
 }

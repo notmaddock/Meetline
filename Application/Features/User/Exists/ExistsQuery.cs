@@ -5,6 +5,10 @@ using Mediator;
 
 namespace Application.Features.User.Exists;
 
+/// <summary>
+///     Checks if a user exists given their ID
+/// </summary>
+/// <param name="Id">The user's ID</param>
 public record ExistsQuery(Guid Id) : IQuery<Result<ExistsResponse>>, ICachableRequest
 {
     public string CacheKey => UserCacheKeys.Exists(Id);

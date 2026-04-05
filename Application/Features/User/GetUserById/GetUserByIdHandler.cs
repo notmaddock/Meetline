@@ -1,3 +1,4 @@
+using Application.Features.User.DTOs.UserPublicResponse;
 using Application.Repositories;
 using FluentResults;
 using Mediator;
@@ -5,11 +6,11 @@ using Mediator;
 namespace Application.Features.User.GetUserById;
 
 public class GetUserByIdHandler(IUserRepository repository)
-    : IQueryHandler<GetUserByIdQuery, Result<GetUserByIdResponse>>
+    : IQueryHandler<GetUserByIdQuery, Result<UserPublicResponse>>
 {
-    private readonly GetUserByIdResponseMapper _mapper = new();
+    private readonly UserPublicResponseMapper _mapper = new();
 
-    public async ValueTask<Result<GetUserByIdResponse>> Handle(GetUserByIdQuery query,
+    public async ValueTask<Result<UserPublicResponse>> Handle(GetUserByIdQuery query,
         CancellationToken cancellationToken)
     {
         var user = await repository.GetUserById(query.Id, cancellationToken);

@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
+using Application.Features.User.DTOs.UserGuidResponse;
 using Application.Features.User.GetUserIdByExternalId;
 using Application.Repositories;
 using JetBrains.Annotations;
@@ -38,7 +39,7 @@ public class GetUserIdByExternalIdHandlerTest
 
         Assert.True(result.IsSuccess);
         Assert.NotNull(result.Value);
-        Assert.IsType<GetUserIdByExternalIdResponse>(result.Value);
+        Assert.IsType<UserGuidResponse>(result.Value);
         Assert.Equal(userId, result.Value.Id);
     }
 

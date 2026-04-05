@@ -59,10 +59,8 @@ app.UseExceptionHandler();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi("/api/openapi").AllowAnonymous();
-    app.MapScalarApiReference("/api/scalar", options =>
-    {
-        options.OpenApiRoutePattern = "/api/openapi";
-    }).AllowAnonymous();
+    app.MapScalarApiReference("/api/scalar", options => { options.OpenApiRoutePattern = "/api/openapi"; })
+        .AllowAnonymous();
 
     app.MapGroup("/api/_debug").AllowAnonymous().MapDebugV1Endpoints();
 }

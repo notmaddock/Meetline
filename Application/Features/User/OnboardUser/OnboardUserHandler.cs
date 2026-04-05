@@ -1,28 +1,26 @@
+using Application.Features.Generic.User;
+using Application.Features.User.DTOs.UserResponse;
 using Application.Repositories;
 using FluentResults;
 using Mediator;
+using CreateUserRequestMapper = Application.Features.User.DTOs.CreateUserRequest.CreateUserRequestMapper;
 
 namespace Application.Features.User.OnboardUser;
 
-public class OnboardUserHandler(IUserRepository repository) : ICommandHandler<OnboardUserCommand, Result<Guid>>
+public class OnboardUserHandler(IUserRepository repository) : ICommandHandler<OnboardUserCommand, Result<UserResponse>>
 {
-    public async ValueTask<Result<Guid>> Handle(OnboardUserCommand command, CancellationToken cancellationToken)
+    private readonly CreateUserRequestMapper _requestMapper = new();
+    private readonly UserResponseMapper _responseMapper = new();
+
+    public async ValueTask<Result<UserResponse>> Handle(OnboardUserCommand command, CancellationToken cancellationToken)
     {
         var existingUserId = await repository.GetUserIdFromExternalId(command.ExternalId, cancellationToken);
-        if (existingUserId is not null) return Result.Fail(OnboardUserErrors.UserAlreadyOnboardError());
+        if (existingUserId is not null) return Result.Fail(GenericUserErrors.UserAlreadyOnboardError());
 
-        var user = new Domain.Entities.User
-        {
-            Id = Guid.NewGuid(),
-            ExternalId = command.ExternalId,
-            Username = command.Username,
-            Email = command.Email,
-            FirstName = command.FirstName,
-            LastName = command.LastName
-        };
+        var user = _requestMapper.ToUser(command.Request, command.ExternalId);
 
         await repository.CreateAsync(user, cancellationToken);
 
-        return Result.Ok(user.Id);
+        return Result.Ok(_responseMapper.ToResponse(user));
     }
 }
