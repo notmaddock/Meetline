@@ -16,4 +16,9 @@ public static class UserCacheKeys
     {
         return $"users:exists:{id}";
     }
+
+    public static string UsernameAvailability(string username)
+    {
+        return $"users:username-available:{username}";
+    }
 }

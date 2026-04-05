@@ -4,6 +4,7 @@ using Application.Features.User.DTOs.UserPublicResponse;
 using Application.Features.User.DTOs.UserResponse;
 using Application.Features.User.GetOwnUserById;
 using Application.Features.User.GetUserById;
+using Application.Features.User.GetUsernameAvailability;
 using Application.Features.User.OnboardUser;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Web.Extensions;
@@ -36,6 +37,26 @@ public static class UserEndpoints
                              Creates a new user account linked to an external identity (e.g. from Auth0, Firebase, etc.).
                              This endpoint is public and should be called after successful external authentication.
                              """);
+
+        users.MapGet("/availability", GetUsernameAvailability)
+            .AllowNonRegistered()
+            .WithName("UsernameAvailability")
+            .WithSummary("Check the availability of a username")
+            .WithDescription(
+                "Checks whether a username is available or not, to be used with a frontend's input field");
+    }
+
+    private static async Task<Results<Ok<GetUsernameAvailabilityResponse>, ProblemHttpResult>> GetUsernameAvailability(
+        Mediator.Mediator mediator, string username)
+    {
+        var result = await mediator.Send(new GetUsernameAvailabilityQuery
+        {
+            Username = username
+        });
+
+        return result.IsSuccess
+            ? TypedResults.Ok(result.Value)
+            : result.ToProblemHttpResult();
     }
 
     private static async Task<Results<Ok<UserResponse>, ForbidHttpResult, ProblemHttpResult>>

@@ -25,6 +25,11 @@ public class UserRepository(ApplicationDbContext ctx) : IUserRepository
         return ctx.Users.AnyAsync(u => u.Id == id, ct);
     }
 
+    public Task<bool> ExistsAsync(string username, CancellationToken ct)
+    {
+        return ctx.Users.AnyAsync(u => u.Username == username, ct);
+    }
+
     public async Task CreateAsync(User user, CancellationToken ct)
     {
         await ctx.Users.AddAsync(user, ct);
