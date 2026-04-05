@@ -1,5 +1,5 @@
 using Application.Errors;
-using Application.Features.Generic.User;
+using Application.Features.User.Errors;
 
 namespace Application.Features.User.GetUserById;
 

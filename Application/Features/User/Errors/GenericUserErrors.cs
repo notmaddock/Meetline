@@ -1,6 +1,6 @@
 using Application.Errors;
 
-namespace Application.Features.Generic.User;
+namespace Application.Features.User.Errors;
 
 public class GenericUserErrors
 {

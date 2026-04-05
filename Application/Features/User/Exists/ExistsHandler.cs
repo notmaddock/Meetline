@@ -1,4 +1,4 @@
-using Application.Features.Generic.User;
+using Application.Features.User.Errors;
 using Application.Repositories;
 using FluentResults;
 using Mediator;
