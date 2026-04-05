@@ -11,5 +11,10 @@ public record OnboardUserCommand(
     CreateUserRequest Request,
     string ExternalId) : ICommand<Result<UserResponse>>, IInvalidateCacheRequest
 {
-    public string[] CacheKeysToInvalidate => [UserCacheKeys.ByExternalId(ExternalId)];
+    public string[] CacheKeysToInvalidate =>
+    [
+        UserCacheKeys.ByExternalId(ExternalId),
+        UserCacheKeys.EmailAvailability(Request.Email),
+        UserCacheKeys.UsernameAvailability(Request.Username)
+    ];
 }
