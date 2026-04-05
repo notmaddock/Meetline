@@ -1,3 +1,4 @@
+using Application.Features.Role.DTOs.RoleResponse;
 using Application.Repositories;
 using FluentResults;
 using Mediator;
@@ -5,17 +6,17 @@ using Mediator;
 namespace Application.Features.Role.GetRoleById;
 
 public class GetRoleByIdHandler(IRoleRepository repository)
-    : IQueryHandler<GetRoleByIdQuery, Result<GetRoleByIdResponse>>
+    : IQueryHandler<GetRoleByIdQuery, Result<RoleResponse>>
 {
-    private static readonly GetRoleByIdMapper Mapper = new();
+    private readonly RoleResponseMapper _mapper = new();
 
-    public async ValueTask<Result<GetRoleByIdResponse>> Handle(GetRoleByIdQuery query,
+    public async ValueTask<Result<RoleResponse>> Handle(GetRoleByIdQuery query,
         CancellationToken cancellationToken)
     {
         var role = await repository.GetRoleByIdAsync(query.Id, cancellationToken);
 
         if (role is null) return Result.Fail(GenericRoleErrors.RoleNotFound(query.Id));
 
-        return Mapper.ToResponse(role);
+        return _mapper.ToResponse(role);
     }
 }
