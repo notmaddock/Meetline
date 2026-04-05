@@ -1,6 +1,6 @@
 using Application.Errors;
 
-namespace Application.Features.Role;
+namespace Application.Features.Role.Errors;
 
 public static class GenericRoleErrors
 {

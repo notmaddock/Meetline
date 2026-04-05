@@ -10,7 +10,7 @@ public class GetUsernameAvailabilityHandler(IUserRepository repository)
     public async ValueTask<Result<GetUsernameAvailabilityResponse>> Handle(GetUsernameAvailabilityQuery query,
         CancellationToken cancellationToken)
     {
-        var taken = await repository.ExistsAsync(query.Username, cancellationToken);
+        var taken = await repository.ExistsByUsernameAsync(query.Username, cancellationToken);
         return Result.Ok(new GetUsernameAvailabilityResponse(query.Username, !taken));
     }
 }
