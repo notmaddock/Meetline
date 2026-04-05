@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,14 +11,23 @@ public class BadHttpRequestExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        if (exception is not BadHttpRequestException)
+        var isBadRequest = exception is BadHttpRequestException;
+        var jsonException = exception as JsonException ?? exception.InnerException as JsonException;
+
+        if (!isBadRequest && jsonException is null)
             return false;
+
+        var detailMessage = "Invalid request payload.";
+
+        if (jsonException is not null)
+            detailMessage = jsonException.Message;
+        else if (isBadRequest) detailMessage = exception.Message;
 
         var problem = new ProblemDetails
         {
             Title = "Bad Request",
             Status = StatusCodes.Status400BadRequest,
-            Detail = "Breach of contract detected, probably a missing request body.",
+            Detail = detailMessage,
             Type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
             Instance = httpContext.Request.Path
         };
