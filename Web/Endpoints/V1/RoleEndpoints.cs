@@ -1,8 +1,10 @@
 using Application.Features.Role.CreateRole;
+using Application.Features.Role.DTOs.CreateRoleRequest;
 using Application.Features.Role.DTOs.RoleResponse;
 using Application.Features.Role.GetRoleById;
 using Application.Features.Role.GetRoles;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Web.Extensions;
 
 namespace Web.Endpoints.V1;
@@ -46,9 +48,9 @@ public static class RoleEndpoints
     }
 
     private static async Task<Results<Created<RoleResponse>, ForbidHttpResult, ProblemHttpResult>> CreateRole(
-        Mediator.Mediator mediator, CreateRoleCommand command)
+        Mediator.Mediator mediator, [FromBody] CreateRoleRequest request)
     {
-        var result = await mediator.Send(command);
+        var result = await mediator.Send(new CreateRoleCommand(request));
 
         return result.IsSuccess
             ? TypedResults.Created($"/api/roles/{result.Value}", result.Value)
