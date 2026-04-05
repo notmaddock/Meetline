@@ -22,16 +22,12 @@ public static class UserEndpoints
         users.MapGet("/me", GetCurrentUser)
             .WithName("GetCurrentUser")
             .WithSummary("Get the currently authenticated user")
-            .WithDescription("Returns the full profile of the user making the request. Requires a valid JWT token.")
-            .ProducesProblem(StatusCodes.Status401Unauthorized)
-            .ProducesProblem(StatusCodes.Status404NotFound);
+            .WithDescription("Returns the full profile of the user making the request. Requires a valid JWT token.");
 
         users.MapGet("/{id:guid}", GetUserById)
             .WithName("GetUserById")
             .WithSummary("Get user by ID")
-            .WithDescription("Retrieves a user profile by their unique identifier.")
-            .ProducesProblem(StatusCodes.Status404NotFound)
-            .ProducesProblem(StatusCodes.Status401Unauthorized);
+            .WithDescription("Retrieves a user profile by their unique identifier.");
 
         users.MapPost("/onboard", Onboard)
             .AllowNonRegistered()
@@ -40,12 +36,10 @@ public static class UserEndpoints
             .WithDescription("""
                              Creates a new user account linked to an external identity (e.g. from Auth0, Firebase, etc.).
                              This endpoint is public and should be called after successful external authentication.
-                             """)
-            .ProducesProblem(StatusCodes.Status400BadRequest)
-            .ProducesProblem(StatusCodes.Status401Unauthorized);
+                             """);
     }
 
-    private static async Task<Results<Ok<UserResponse>, ProblemHttpResult>>
+    private static async Task<Results<Ok<UserResponse>, ForbidHttpResult, ProblemHttpResult>>
         GetCurrentUser(Mediator.Mediator mediator, CurrentUserScope scope)
     {
         var result = await mediator.Send(new GetOwnUserByIdQuery(scope.Id));
@@ -55,7 +49,7 @@ public static class UserEndpoints
             : result.ToProblemHttpResult();
     }
 
-    private static async Task<Results<Ok<UserPublicResponse>, ProblemHttpResult>>
+    private static async Task<Results<Ok<UserPublicResponse>, NotFound, ProblemHttpResult>>
         GetUserById(Mediator.Mediator mediator, Guid id)
     {
         var result = await mediator.Send(new GetUserByIdQuery(id));
@@ -65,7 +59,8 @@ public static class UserEndpoints
             : result.ToProblemHttpResult();
     }
 
-    private static async Task<Results<Created<UserResponse>, UnauthorizedHttpResult, ProblemHttpResult>>
+    private static async
+        Task<Results<Created<UserResponse>, BadRequest, UnauthorizedHttpResult, Conflict, ProblemHttpResult>>
         Onboard(
             Mediator.Mediator mediator,
             HttpContext context,
