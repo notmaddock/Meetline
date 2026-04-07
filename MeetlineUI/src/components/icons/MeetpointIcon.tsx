@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react'
+
 const MeetpointIcon = (props: ComponentProps<'svg'>) => (
   <svg
     width={512}

@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
 import { ClerkProvider, useAuth, useUser } from '@clerk/react'
+import { routeTree } from './routeTree.gen'
+import type { RouterContext } from '#/routes/__root.tsx'
 import { env } from '#/env.ts'
 import { Spinner } from '#/components/ui/spinner.tsx'
 import {
@@ -11,13 +12,12 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '#/components/ui/empty.tsx'
-import type { RouterContext } from '#/routes/__root.tsx'
 
 const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
-  context: {} as RouterContext
+  context: {} as RouterContext,
 })
 
 declare module '@tanstack/react-router' {
@@ -39,24 +39,25 @@ if (!rootElement.innerHTML) {
 
 function App() {
   const auth = useAuth()
-  const user = useUser();
+  const user = useUser()
 
   if (!auth.isLoaded) return <AuthLoadingSpinner />
-
 
   return <RouterProvider router={router} context={{ auth, user }} />
 }
 
 function AuthLoadingSpinner() {
-  return <main className={'fixed inset-0 flex justify-center'}>
-    <Empty>
-      <EmptyHeader>
-        <EmptyMedia variant={'icon'}>
-          <Spinner />
-        </EmptyMedia>
-        <EmptyTitle>Meetline</EmptyTitle>
-        <EmptyDescription>Signing you in...</EmptyDescription>
-      </EmptyHeader>
-    </Empty>
-  </main>
+  return (
+    <main className={'fixed inset-0 flex justify-center'}>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant={'icon'}>
+            <Spinner />
+          </EmptyMedia>
+          <EmptyTitle>Meetline</EmptyTitle>
+          <EmptyDescription>Signing you in...</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    </main>
+  )
 }

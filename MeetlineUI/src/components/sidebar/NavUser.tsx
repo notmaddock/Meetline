@@ -1,3 +1,6 @@
+import { ChevronsUpDown, CircleUserIcon, LogOutIcon } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import type { ComponentProps } from 'react'
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -13,10 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '#/components/ui/dropdown-menu.tsx'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar.tsx'
-import { ChevronsUpDown, CircleUserIcon, LogOutIcon } from 'lucide-react'
 import { useIsMobile } from '#/hooks/use-mobile.ts'
-import type { ComponentProps } from 'react'
-import { Link } from '@tanstack/react-router'
 
 export type SidebarUser = {
   emailAddress: string | null

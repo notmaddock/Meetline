@@ -1,14 +1,14 @@
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import { useAuth, useUser } from '@clerk/react'
+import type { useAuth, useUser } from '@clerk/react'
 
 import '../styles.css'
 import type { QueryClient } from '@tanstack/react-query'
 
 export type RouterContext = {
-  auth: ReturnType<typeof useAuth>,
-  user: ReturnType<typeof useUser>,
+  auth: ReturnType<typeof useAuth>
+  user: ReturnType<typeof useUser>
   queryClient: QueryClient
 }
 

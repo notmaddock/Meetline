@@ -1,11 +1,7 @@
-import { createFileRoute, Outlet, useLocation } from '@tanstack/react-router'
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from '#/components/ui/sidebar.tsx'
-import { MainSidebar } from '#/components/sidebar/MainSidebar.tsx'
+import { Outlet, createFileRoute, useLocation } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
+import { SidebarInset, SidebarProvider } from '#/components/ui/sidebar.tsx'
+import { MainSidebar } from '#/components/sidebar/MainSidebar.tsx'
 import { useIsMobile } from '#/hooks/use-mobile.ts'
 import { MainHeader } from '#/components/header/MainHeader.tsx'
 
@@ -21,7 +17,7 @@ function RouteComponent() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
 
   const sidebarUser = useMemo(() => {
-    const u = user?.user
+    const u = user.user
 
     if (!u) return null
 
@@ -41,7 +37,6 @@ function RouteComponent() {
       open={isMobile && isSidebarOpen}
       onOpenChange={setIsSidebarOpen}
     >
-
       <MainSidebar user={sidebarUser} currentPath={href} />
       <SidebarInset>
         <MainHeader />

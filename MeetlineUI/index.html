@@ -4,23 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      (function () {
+      ;(function () {
         try {
-          let theme = localStorage.getItem('theme');
+          let theme = localStorage.getItem('theme')
 
           if (!theme || theme === 'auto') {
             theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-                    ? 'dark'
-                    : 'light';
+              ? 'dark'
+              : 'light'
           }
 
-          const root = document.documentElement;
+          const root = document.documentElement
 
-          root.classList.add(theme);
-          root.dataset.theme = theme;
-          root.style.colorScheme = theme;
+          root.classList.add(theme)
+          root.dataset.theme = theme
+          root.style.colorScheme = theme
         } catch (e) {}
-      })();
+      })()
     </script>
     <title>Meetline</title>
   </head>

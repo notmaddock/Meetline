@@ -1,3 +1,7 @@
+import { CalendarDaysIcon, MessageCircleIcon } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import type { ComponentProps } from 'react'
+import type { SidebarUser } from '#/components/sidebar/NavUser.tsx'
 import {
   Sidebar,
   SidebarContent,
@@ -9,10 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '#/components/ui/sidebar.tsx'
-import type { ComponentProps } from 'react'
-import { NavUser, type SidebarUser } from '#/components/sidebar/NavUser.tsx'
-import { CalendarDaysIcon, MessageCircleIcon } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
+import { NavUser } from '#/components/sidebar/NavUser.tsx'
 import MeetpointIcon from '#/components/icons/MeetpointIcon.tsx'
 import TeamsIcon from '#/components/icons/TeamsIcon.tsx'
 import OutlookIcon from '#/components/icons/OutlookIcon.tsx'
@@ -81,22 +82,22 @@ export function MainSidebar({ user, currentPath, ...props }: MainSidebarProps) {
             ))}
           </SidebarMenu>
         </SidebarGroup>
-      <SidebarGroup className={'mt-auto'}>
-        <SidebarGroupLabel>External</SidebarGroupLabel>
-        <SidebarMenu>
-          {footerLinks.map((link) => (
-            <SidebarMenuItem key={link.name}>
-              <SidebarMenuButton
-                render={<a href={link.href} target={'_blank'} />}
-                tooltip={link.name}
-              >
-                {link.icon}
-                {link.name}
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroup>
+        <SidebarGroup className={'mt-auto'}>
+          <SidebarGroupLabel>External</SidebarGroupLabel>
+          <SidebarMenu>
+            {footerLinks.map((link) => (
+              <SidebarMenuItem key={link.name}>
+                <SidebarMenuButton
+                  render={<a href={link.href} target={'_blank'} />}
+                  tooltip={link.name}
+                >
+                  {link.icon}
+                  {link.name}
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />
