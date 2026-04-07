@@ -1,11 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Input } from '#/components/ui/input.tsx'
-import { Search } from 'lucide-react'
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from '#/components/ui/resizable.tsx'
 import { Button } from '#/components/ui/button'
 
 export const Route = createFileRoute('/_auth/_sidebar/')({

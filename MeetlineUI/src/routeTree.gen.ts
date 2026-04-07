@@ -13,6 +13,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as AuthSidebarRouteImport } from './routes/_auth/_sidebar'
 import { Route as AuthSidebarIndexRouteImport } from './routes/_auth/_sidebar/index'
+import type { getRouter } from './router.tsx'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
@@ -129,8 +130,6 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
