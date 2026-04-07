@@ -11,11 +11,13 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '#/components/ui/empty.tsx'
+import type { RouterContext } from '#/routes/__root.tsx'
 
 const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
+  context: {} as RouterContext
 })
 
 declare module '@tanstack/react-router' {
