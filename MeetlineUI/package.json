@@ -12,7 +12,7 @@
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier --check .",
-    "check": "prettier --write . && eslint --fix",
+    "check": "prettier --write . && eslint --fix && tsc",
     "typecheck": "tsc"
   },
   "dependencies": {
