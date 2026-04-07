@@ -1,7 +1,6 @@
-import axios from 'axios'
-import { redirect } from '@tanstack/react-router'
-import { getAccessToken } from '../session/tokens.server'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios from 'axios'
+import { getAccessToken } from '../session/tokens.server'
 import { env } from '@/env'
 import { useAppSession } from '@/server/session/cookie.server.ts'
 import type { ZodSchema } from 'zod'
@@ -53,20 +52,7 @@ AXIOS_INSTANCE.interceptors.response.use(
     }
     return response
   },
-  async (error) => {
-    if (error.response) {
-      const { status, headers } = error.response
-
-      const onboardingRequired = headers['x-onboarding-required'] === 'true'
-
-      if (status === 403 && onboardingRequired) {
-        throw redirect({
-          to: '/onboarding',
-        })
-      }
-    }
-    return Promise.reject(error)
-  },
+  async (error) => Promise.reject(error)
 )
 
 export const fetcher = async <T>(config: AxiosRequestConfig): Promise<T> => {
