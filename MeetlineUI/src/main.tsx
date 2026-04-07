@@ -12,6 +12,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '#/components/ui/empty.tsx'
+import { Toaster } from 'sonner'
 
 const router = createRouter({
   routeTree,
@@ -44,6 +45,7 @@ if (!rootElement.innerHTML) {
       }}
     >
       <App />
+      <Toaster theme='dark' position='top-center' />
     </ClerkProvider>,
   )
 }

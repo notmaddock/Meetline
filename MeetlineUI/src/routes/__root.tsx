@@ -5,6 +5,7 @@ import type { useAuth, useUser } from '@clerk/react'
 
 import '../styles.css'
 import type { QueryClient } from '@tanstack/react-query'
+import { GlobalErrorComponent } from '#/components/GlobalErrorComponent'
 
 export type RouterContext = {
   auth: ReturnType<typeof useAuth>
@@ -14,6 +15,7 @@ export type RouterContext = {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
+  errorComponent: GlobalErrorComponent
 })
 
 function RootComponent() {
