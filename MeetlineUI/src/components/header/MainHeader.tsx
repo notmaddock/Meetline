@@ -23,6 +23,7 @@ import {
   SheetTrigger,
 } from '#/components/ui/sheet.tsx'
 import { UniversalSearchTrigger } from '#/components/universal-search/UniversalSearchTrigger.tsx'
+import { AssistantTrigger } from '../assistant/AssistantTrigger'
 
 export function MainHeader() {
   const isMobile = useIsMobile()
@@ -49,22 +50,7 @@ export function MainHeader() {
       </div>
 
       <div className="flex justify-end">
-        <Sheet>
-          <SheetTrigger render={<Button variant={'ghost'} />}>
-            <SparklesIcon />
-          </SheetTrigger>
-          <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Valis AI</SheetTitle>
-            </SheetHeader>
-            <iframe
-              src="https://ai.valis.jala.university"
-              title="Valis AI"
-              width="100%"
-              height="100%"
-            ></iframe>
-          </SheetContent>
-        </Sheet>
+        <AssistantTrigger />
       </div>
     </header>
   )
