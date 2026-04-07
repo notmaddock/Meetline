@@ -12,10 +12,5 @@
   "version": 1,
   "addOns": true,
   "framework": "react",
-  "chosenAddOns": [
-    "eslint",
-    "tanstack-query",
-    "t3env",
-    "compiler"
-  ]
+  "chosenAddOns": ["eslint", "tanstack-query", "t3env", "compiler"]
 }
