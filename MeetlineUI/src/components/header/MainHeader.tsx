@@ -22,7 +22,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '#/components/ui/sheet.tsx'
-import { UniversalSearch } from '#/components/universal-search/UniversalSearch.tsx'
+import { UniversalSearchTrigger } from '#/components/universal-search/UniversalSearchTrigger.tsx'
 
 export function MainHeader() {
   const isMobile = useIsMobile()
@@ -45,7 +45,7 @@ export function MainHeader() {
       </div>
 
       <div className="flex justify-center">
-        <UniversalSearch />
+        <UniversalSearchTrigger />
       </div>
 
       <div className="flex justify-end">

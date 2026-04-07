@@ -7,6 +7,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
+  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
@@ -18,6 +19,8 @@ import MeetpointIcon from '#/components/icons/MeetpointIcon.tsx'
 import TeamsIcon from '#/components/icons/TeamsIcon.tsx'
 import OutlookIcon from '#/components/icons/OutlookIcon.tsx'
 import CanvasLMSIcon from '#/components/icons/CanvasLMSIcon.tsx'
+import { UniversalSearchTrigger } from '#/components/universal-search/UniversalSearchTrigger.tsx'
+import { useIsMobile } from '#/hooks/use-mobile.ts'
 
 type MainSidebarProps = ComponentProps<typeof Sidebar> & {
   user: SidebarUser | null
@@ -25,6 +28,8 @@ type MainSidebarProps = ComponentProps<typeof Sidebar> & {
 }
 
 export function MainSidebar({ user, currentPath, ...props }: MainSidebarProps) {
+  const isMobile = useIsMobile()
+
   const mainLinks = [
     {
       name: 'Chats',
@@ -63,7 +68,9 @@ export function MainSidebar({ user, currentPath, ...props }: MainSidebarProps) {
 
   return (
     <Sidebar collapsible={'icon'} {...props}>
-      <SidebarHeader></SidebarHeader>
+      <SidebarHeader>
+        {isMobile && <UniversalSearchTrigger className={'mx-auto'} />}
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Meetline</SidebarGroupLabel>

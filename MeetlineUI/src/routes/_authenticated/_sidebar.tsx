@@ -4,6 +4,7 @@ import { SidebarInset, SidebarProvider } from '#/components/ui/sidebar.tsx'
 import { MainSidebar } from '#/components/sidebar/MainSidebar.tsx'
 import { useIsMobile } from '#/hooks/use-mobile.ts'
 import { MainHeader } from '#/components/header/MainHeader.tsx'
+import { GlobalOverlays } from '#/components/GlobalOverlays.tsx'
 
 export const Route = createFileRoute('/_authenticated/_sidebar')({
   component: RouteComponent,
@@ -33,15 +34,18 @@ function RouteComponent() {
   const isMobile = useIsMobile()
 
   return (
-    <SidebarProvider
-      open={isMobile && isSidebarOpen}
-      onOpenChange={setIsSidebarOpen}
-    >
-      <MainSidebar user={sidebarUser} currentPath={href} />
-      <SidebarInset>
-        <MainHeader />
-        <Outlet />
-      </SidebarInset>
-    </SidebarProvider>
+    <>
+      <SidebarProvider
+        open={isMobile && isSidebarOpen}
+        onOpenChange={setIsSidebarOpen}
+      >
+        <MainSidebar user={sidebarUser} currentPath={href} />
+        <SidebarInset>
+          <MainHeader />
+          <Outlet />
+        </SidebarInset>
+      </SidebarProvider>
+      <GlobalOverlays />
+    </>
   )
 }

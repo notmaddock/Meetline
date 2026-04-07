@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { MailIcon, PhoneOutgoingIcon } from 'lucide-react'
 import { Button } from '#/components/ui/button'
 import {
@@ -11,23 +11,56 @@ import {
   CommandList,
   CommandShortcut,
 } from '#/components/ui/command'
-import { Kbd } from '#/components/ui/kbd.tsx'
 import { Avatar, AvatarImage } from '#/components/ui/avatar.tsx'
-import { useUniversalSearch } from '#/components/universal-search/UniversalSearchProvider.tsx'
+import { create } from 'zustand'
+
+export const useUniversalSearch = create((set) => ({
+  isOpen: false,
+  setIsOpen: (open: boolean) => set(() => ({ isOpen: open })),
+}))
 
 export function UniversalSearch() {
-  const [_, setOpen] = useUniversalSearch()
+  const { isOpen, setIsOpen } = useUniversalSearch()
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setIsOpen(!isOpen)
+      }
+    }
+    window.addEventListener('keydown', down)
+    return () => window.removeEventListener('keydown', down)
+  }, [isOpen, setIsOpen])
 
   return (
-    <>
-      <Button
-        variant="outline"
-        className="h-8 w-full max-w-xs justify-start text-muted-foreground hidden md:flex"
-        onClick={() => setOpen(true)}
-      >
-        <span className="inline-flex">Search all of Meetline...</span>
-        <Kbd className="ml-auto">⌘ K</Kbd>
-      </Button>
-    </>
+    <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
+      <Command>
+        <CommandInput placeholder="Find people, chats, and more" />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="People">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((x) => (
+              <CommandItem key={x}>
+                <Avatar>
+                  <AvatarImage
+                    src={`https://randomuser.me/api/portraits/lego/${x}.jpg`}
+                  />
+                </Avatar>
+                Test user #{x}
+                <CommandShortcut>
+                  <Button variant={'ghost'}>
+                    <PhoneOutgoingIcon />
+                  </Button>
+                  <Button variant={'ghost'}>
+                    <MailIcon />
+                  </Button>
+                </CommandShortcut>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    </CommandDialog>
   )
 }
