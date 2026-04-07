@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
 using Web.Endpoints.V1;
+using Web.Endpoints.Webhooks;
 using Web.Filters;
 
 namespace Web.Endpoints;
@@ -20,5 +21,7 @@ public static class EndpointExtensions
 
         api.MapGroup("/users").MapUserEndpoints();
         api.MapGroup("/roles").MapRoleEndpoints();
+
+        api.MapGroup("/webhooks").MapWebhookEndpoints();
     }
 }
