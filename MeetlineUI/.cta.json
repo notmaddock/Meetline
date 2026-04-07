@@ -10,6 +10,12 @@
   "git": false,
   "routerOnly": true,
   "version": 1,
+  "addOns": true,
   "framework": "react",
-  "chosenAddOns": ["eslint"]
+  "chosenAddOns": [
+    "eslint",
+    "tanstack-query",
+    "t3env",
+    "compiler"
+  ]
 }
