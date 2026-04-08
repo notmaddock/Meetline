@@ -1,17 +1,23 @@
 import { SparklesIcon } from 'lucide-react'
+import { create } from 'zustand'
 import { Button } from '../ui/button'
 import {
   Sheet,
-  SheetTrigger,
   SheetContent,
+  SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetFooter,
-  SheetDescription,
+  SheetTrigger,
 } from '../ui/sheet'
-import { create } from 'zustand'
 import { Checkbox } from '../ui/checkbox'
-import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from '../ui/field'
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+  FieldTitle,
+} from '../ui/field'
 
 const ASSISTANT_URL = 'https://ai.valis.jala.university'
 const ASSISTANT_TITLE = 'Valis AI'
@@ -28,7 +34,9 @@ export const useAssistant = create<AssistantState>((set) => ({
   isClosingPrevented: false,
   setIsOpen: (open) =>
     set((state) => ({
-      isOpen: state.isClosingPrevented || (typeof open === 'function' ? open(state.isOpen) : open),
+      isOpen:
+        state.isClosingPrevented ||
+        (typeof open === 'function' ? open(state.isOpen) : open),
     })),
   setIsClosingPrevented: (prevent) =>
     set((state) => ({
@@ -40,14 +48,23 @@ export const useAssistant = create<AssistantState>((set) => ({
 }))
 
 export function Assistant() {
-  const { isOpen, setIsOpen, isClosingPrevented, setIsClosingPrevented } = useAssistant()
+  const { isOpen, setIsOpen, isClosingPrevented, setIsClosingPrevented } =
+    useAssistant()
 
   return (
     <Sheet open={isOpen || isClosingPrevented} onOpenChange={setIsOpen}>
-      <SheetContent className={'max-w-2xl!'} showCloseButton={!isClosingPrevented}>
+      <SheetContent
+        className={'max-w-2xl!'}
+        showCloseButton={!isClosingPrevented}
+      >
         <SheetHeader>
           <SheetTitle>Valis AI</SheetTitle>
-          { isClosingPrevented && <SheetDescription>This dialog is currently locked and can't close. Use the checkbox below to allow closing</SheetDescription>}
+          {isClosingPrevented && (
+            <SheetDescription>
+              This dialog is currently locked and can't close. Use the checkbox
+              below to allow closing
+            </SheetDescription>
+          )}
         </SheetHeader>
         <iframe
           src={ASSISTANT_URL}
@@ -58,11 +75,15 @@ export function Assistant() {
         <SheetFooter>
           <FieldLabel>
             <Field orientation="horizontal">
-              <Checkbox checked={isClosingPrevented} onCheckedChange={setIsClosingPrevented} />
+              <Checkbox
+                checked={isClosingPrevented}
+                onCheckedChange={setIsClosingPrevented}
+              />
               <FieldContent>
                 <FieldTitle>Lock open</FieldTitle>
                 <FieldDescription>
-                    Doing something important? Prevent this dialog from closing and don't lose your progress.
+                  Doing something important? Prevent this dialog from closing
+                  and don't lose your progress.
                 </FieldDescription>
               </FieldContent>
             </Field>

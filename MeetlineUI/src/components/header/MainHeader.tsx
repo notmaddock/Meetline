@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MailIcon, PhoneOutgoingIcon, SparklesIcon } from 'lucide-react'
+import { AssistantTrigger } from '../assistant/AssistantTrigger'
 import { SidebarTrigger } from '#/components/ui/sidebar.tsx'
 import { useIsMobile } from '#/hooks/use-mobile.ts'
 import { Button } from '#/components/ui/button'
@@ -23,7 +24,6 @@ import {
   SheetTrigger,
 } from '#/components/ui/sheet.tsx'
 import { UniversalSearchTrigger } from '#/components/universal-search/UniversalSearchTrigger.tsx'
-import { AssistantTrigger } from '../assistant/AssistantTrigger'
 
 export function MainHeader() {
   const isMobile = useIsMobile()

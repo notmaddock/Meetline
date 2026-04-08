@@ -15,7 +15,7 @@ export type RouterContext = {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
-  errorComponent: GlobalErrorComponent
+  errorComponent: GlobalErrorComponent,
 })
 
 function RootComponent() {

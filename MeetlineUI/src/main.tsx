@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { ClerkProvider, useAuth, useUser } from '@clerk/react'
+import { Toaster } from 'sonner'
 import { routeTree } from './routeTree.gen'
 import type { RouterContext } from '#/routes/__root.tsx'
 import { env } from '#/env.ts'
@@ -12,7 +13,6 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '#/components/ui/empty.tsx'
-import { Toaster } from 'sonner'
 
 const router = createRouter({
   routeTree,
@@ -45,7 +45,7 @@ if (!rootElement.innerHTML) {
       }}
     >
       <App />
-      <Toaster theme='dark' position='top-center' />
+      <Toaster theme="dark" position="top-center" />
     </ClerkProvider>,
   )
 }

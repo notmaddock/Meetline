@@ -1,10 +1,14 @@
-import React, { type ComponentProps } from 'react'
+import React from 'react'
+import { useUniversalSearch } from './UniversalSearch'
+import type {ComponentProps} from 'react';
 import { Button } from '#/components/ui/button'
 import { Kbd } from '#/components/ui/kbd.tsx'
-import { useUniversalSearch } from './UniversalSearch'
 import { cn } from '#/lib/utils.ts'
 
-export function UniversalSearchTrigger({ className, ...props }: ComponentProps<typeof Button>) {
+export function UniversalSearchTrigger({
+  className,
+  ...props
+}: ComponentProps<typeof Button>) {
   const { setIsOpen } = useUniversalSearch()
 
   return (

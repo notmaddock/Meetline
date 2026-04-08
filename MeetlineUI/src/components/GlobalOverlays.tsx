@@ -1,9 +1,11 @@
-import { UniversalSearch } from '#/components/universal-search/UniversalSearch.tsx'
 import { Assistant } from './assistant/Assistant'
+import { UniversalSearch } from '#/components/universal-search/UniversalSearch.tsx'
 
 export function GlobalOverlays() {
-  return <>
-    <Assistant />
-    <UniversalSearch />
-  </>
+  return (
+    <>
+      <Assistant />
+      <UniversalSearch />
+    </>
+  )
 }

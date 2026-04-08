@@ -68,7 +68,7 @@ export function MainSidebar({ user, currentPath, ...props }: MainSidebarProps) {
 
   return (
     <Sidebar collapsible={'icon'} {...props}>
-      <SidebarHeader className='flex'>
+      <SidebarHeader className="flex">
         {isMobile && <UniversalSearchTrigger className={'max-w-full'} />}
       </SidebarHeader>
       <SidebarContent>

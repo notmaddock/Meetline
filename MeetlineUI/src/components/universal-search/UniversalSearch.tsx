@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { MailIcon, PhoneOutgoingIcon } from 'lucide-react'
+import { create } from 'zustand'
 import { Button } from '#/components/ui/button'
 import {
   Command,
@@ -12,16 +13,18 @@ import {
   CommandShortcut,
 } from '#/components/ui/command'
 import { Avatar, AvatarImage } from '#/components/ui/avatar.tsx'
-import { create } from 'zustand'
 
 type UniversalSearchState = {
-  isOpen: boolean;
+  isOpen: boolean
   setIsOpen: (open: boolean | ((prev: boolean) => boolean)) => void
 }
 
 export const useUniversalSearch = create<UniversalSearchState>((set) => ({
   isOpen: false,
-  setIsOpen: (open) => set((state) => ({ isOpen: typeof open === 'function' ? open(state.isOpen) : open })),
+  setIsOpen: (open) =>
+    set((state) => ({
+      isOpen: typeof open === 'function' ? open(state.isOpen) : open,
+    })),
 }))
 
 export function UniversalSearch() {

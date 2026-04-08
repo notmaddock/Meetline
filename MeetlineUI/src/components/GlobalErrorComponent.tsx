@@ -1,4 +1,6 @@
-import type { ErrorComponentProps } from '@tanstack/react-router'
+import { RefreshCwIcon, RotateCwIcon } from 'lucide-react'
+import { Toaster, toast } from 'sonner'
+import { useState } from 'react'
 import {
   Card,
   CardContent,
@@ -8,15 +10,13 @@ import {
   CardTitle,
 } from './ui/card'
 import { Button } from './ui/button'
-import { RefreshCwIcon, RotateCwIcon } from 'lucide-react'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion'
-import { toast, Toaster } from 'sonner'
-import { useState } from 'react'
+import type { ErrorComponentProps } from '@tanstack/react-router'
 
 export function GlobalErrorComponent({
   error,
@@ -30,7 +30,6 @@ export function GlobalErrorComponent({
     })
     reset()
   }
-
 
   return (
     <>
@@ -48,16 +47,24 @@ export function GlobalErrorComponent({
 
             <Accordion className={'mt-2'}>
               <AccordionItem title="Stack trace" disabled={!error.stack}>
-                <AccordionTrigger>Stack trace{!error.stack && ' unavailable'}</AccordionTrigger>
+                <AccordionTrigger>
+                  Stack trace{!error.stack && ' unavailable'}
+                </AccordionTrigger>
                 <AccordionContent>
-                  <ErrorCode message={error.stack ?? 'No stack trace available'} />
+                  <ErrorCode
+                    message={error.stack ?? 'No stack trace available'}
+                  />
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem title="Stack trace" disabled={!error.cause}>
-                <AccordionTrigger>Cause{!error.cause && ' unavailable'}</AccordionTrigger>
+                <AccordionTrigger>
+                  Cause{!error.cause && ' unavailable'}
+                </AccordionTrigger>
                 <AccordionContent>
-                  <ErrorCode message={(error.cause ?? 'No cause available') as any} />
+                  <ErrorCode
+                    message={(error.cause ?? 'No cause available') as any}
+                  />
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
