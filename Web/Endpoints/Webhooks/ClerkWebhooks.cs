@@ -1,5 +1,3 @@
-using Web.Extensions;
-
 namespace Web.Endpoints.Webhooks;
 
 public static class ClerkWebhooks
