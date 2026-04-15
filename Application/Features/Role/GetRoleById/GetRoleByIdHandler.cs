@@ -16,7 +16,7 @@ public class GetRoleByIdHandler(IRoleRepository repository)
     {
         var role = await repository.GetRoleByIdAsync(query.Id, cancellationToken);
 
-        if (role is null) return Result.Fail(GenericRoleErrors.RoleNotFound(query.Id));
+        if (role is null) return Result.Fail(new RoleNotFoundError(query.Id));
 
         return _mapper.ToResponse(role);
     }

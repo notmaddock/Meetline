@@ -11,6 +11,6 @@ public class ExistsHandler(IUserRepository repository) : IQueryHandler<ExistsQue
     {
         var exists = await repository.ExistsAsync(query.Id, cancellationToken);
 
-        return exists ? Result.Ok() : Result.Fail(GenericUserErrors.UserNotFoundError(query.Id));
+        return exists ? Result.Ok() : Result.Fail(new UserNotFoundError(query.Id));
     }
 }

@@ -1,4 +1,5 @@
 using Application.Errors;
+using Application.Errors.ErrorTypes;
 using FluentResults;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -30,26 +31,19 @@ public static class ResultExtensions
                     ["code"] = error.GetType().Name
                 });
 
-        var statusCode = appError.Type switch
-        {
-            ErrorType.Validation => StatusCodes.Status400BadRequest,
-            ErrorType.Forbidden => StatusCodes.Status403Forbidden,
-            ErrorType.NotFound => StatusCodes.Status404NotFound,
-            ErrorType.Conflict => StatusCodes.Status409Conflict,
-            _ => StatusCodes.Status500InternalServerError
-        };
 
         var problemDetails = new ProblemDetails
         {
             Title = appError.Title ?? "An error occurred",
             Detail = appError.Message,
-            Status = statusCode,
-            Type = GetProblemType(appError.Type) // optional but recommended
+            Status = GetErrorStatusCode(appError),
+            Type = GetErrorProblemRfcType(appError),
+            Extensions =
+            {
+                ["code"] = appError.Code
+            }
         };
 
-        problemDetails.Extensions["code"] = appError.Code;
-
-        // Nice-to-have: include all errors if there are multiple (especially useful for Validation)
         if (result.Errors.Count > 1)
             problemDetails.Extensions["errors"] = result.Errors
                 .Select(e => new { (e as ApplicationError)?.Code, e.Message })
@@ -58,14 +52,30 @@ public static class ResultExtensions
         return TypedResults.Problem(problemDetails);
     }
 
-    private static string? GetProblemType(ErrorType errorType)
+    private static int GetErrorStatusCode(ApplicationError error)
     {
-        return errorType switch
+        return error switch
         {
-            ErrorType.Validation => "https://tools.ietf.org/html/rfc7231#section-6.5.1", // Bad Request
-            ErrorType.NotFound => "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-            ErrorType.Conflict => "https://tools.ietf.org/html/rfc7231#section-6.5.8",
-            ErrorType.Forbidden => "https://tools.ietf.org/html/rfc7231#section-6.5.3",
+            ValidationError => StatusCodes.Status400BadRequest,
+            UnauthorizedError => StatusCodes.Status401Unauthorized,
+            ForbiddenError => StatusCodes.Status403Forbidden,
+            NotFoundError => StatusCodes.Status404NotFound,
+            ConflictError => StatusCodes.Status409Conflict,
+            _ => StatusCodes.Status500InternalServerError
+        };
+    }
+
+    private static string? GetErrorProblemRfcType(ApplicationError error)
+    {
+        // From table at https://datatracker.ietf.org/doc/html/rfc7231#section-6.1
+        return error switch
+        {
+            ValidationError => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1",
+            UnauthorizedError => "https://datatracker.ietf.org/doc/html/rfc7235#section-3.1",
+            ForbiddenError => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3",
+            NotFoundError => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4",
+            ConflictError => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.8",
+            InternalError => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
             _ => null
         };
     }

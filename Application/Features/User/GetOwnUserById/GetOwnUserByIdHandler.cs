@@ -17,7 +17,7 @@ public class GetOwnUserByIdHandler(IUserRepository repository)
         var user = await repository.GetUserById(query.Id, cancellationToken);
 
         return user is null
-            ? Result.Fail(GenericUserErrors.UserNotFoundPerhapsNotOnboardError(query.Id))
+            ? Result.Fail(new UserNotFoundError(query.Id))
             : Result.Ok(_mapper.ToResponse(user));
     }
 }

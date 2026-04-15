@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Errors;
+using Application.Errors.ErrorTypes;
 using Application.Features.User.DTOs.UserPublicResponse;
 using Application.Features.User.GetUserById;
 using Application.Repositories;
@@ -63,8 +63,6 @@ public class GetUserByIdHandlerTest
         var result = await _handler.Handle(query, CancellationToken.None);
 
         Assert.True(result.IsFailed);
-        var err = Assert.Single(result.Errors);
-        Assert.IsType<ApplicationError>(err);
-        Assert.Equal(ErrorType.NotFound, ((ApplicationError)err).Type);
+        Assert.True(result.HasError<NotFoundError>());
     }
 }

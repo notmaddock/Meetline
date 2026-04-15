@@ -1,4 +1,4 @@
-using Application.Errors;
+using Application.Errors.ErrorTypes;
 using FluentResults;
 using FluentValidation;
 using Mediator;
@@ -21,7 +21,7 @@ public sealed class ValidationBehavior<TMessage, TResponse>(IEnumerable<IValidat
             .Select(validator => validator.Validate(context))
             .SelectMany(validationResult => validationResult.Errors)
             .Where(validationFailure => validationFailure is not null)
-            .Select(failure => ApplicationError.Validation(
+            .Select(failure => new GenericValidationError(
                 failure.ErrorCode,
                 failure.PropertyName,
                 failure.ErrorMessage))
@@ -34,4 +34,7 @@ public sealed class ValidationBehavior<TMessage, TResponse>(IEnumerable<IValidat
 
         return result;
     }
+
+    private class GenericValidationError(string code, string title, string message)
+        : ValidationError(code, title, message);
 }

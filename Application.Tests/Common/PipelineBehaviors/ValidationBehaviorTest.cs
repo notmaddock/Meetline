@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.PipelineBehaviors;
-using Application.Errors;
+using Application.Errors.ErrorTypes;
 using FluentResults;
 using FluentValidation;
 using FluentValidation.Results;
@@ -34,9 +34,7 @@ public class ValidationBehaviorTest
         var result = await behavior.Handle(new TestCommand(), nextMock.Object, TestContext.Current.CancellationToken);
 
         Assert.True(result.IsFailed);
-        var error = Assert.Single(result.Errors);
-        Assert.IsType<ApplicationError>(error);
-        Assert.Equal("Validation.Error", ((ApplicationError)error).Code);
+        Assert.True(result.HasError<ValidationError>());
 
         nextMock.Verify(n => n(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()), Times.Never);
     }

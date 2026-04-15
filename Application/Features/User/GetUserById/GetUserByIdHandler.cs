@@ -1,4 +1,5 @@
 using Application.Features.User.DTOs.UserPublicResponse;
+using Application.Features.User.Errors;
 using Application.Repositories;
 using FluentResults;
 using Mediator;
@@ -16,7 +17,7 @@ public class GetUserByIdHandler(IUserRepository repository)
         var user = await repository.GetUserById(query.Id, cancellationToken);
 
         return user is null
-            ? Result.Fail(GetUserByIdErrors.UserNotFoundError(query.Id))
+            ? Result.Fail(new UserNotFoundError(query.Id))
             : Result.Ok(_mapper.ToResponse(user));
     }
 }

@@ -1,4 +1,5 @@
 using Application.Features.User.DTOs.UserGuidResponse;
+using Application.Features.User.Errors;
 using Application.Repositories;
 using FluentResults;
 using Mediator;
@@ -14,7 +15,7 @@ public class GetUserIdByExternalIdHandler(IUserRepository repository)
         var id = await repository.GetUserIdFromExternalId(query.ExternalId, cancellationToken);
 
         return id is null
-            ? Result.Fail(GetUserIdByExternalIdErrors.UserNotFoundError(query.ExternalId))
+            ? Result.Fail(new UserNotFoundError(query.ExternalId))
             : Result.Ok(new UserGuidResponse(id.Value));
     }
 }
