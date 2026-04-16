@@ -41,8 +41,13 @@ public class UserRepository(ApplicationDbContext ctx) : IUserRepository
         await ctx.SaveChangesAsync(ct);
     }
 
-    public Task UpsertByExternalIdAsync(User user, CancellationToken ct)
+    public async Task<User> UpsertByExternalIdAsync(User user, CancellationToken ct)
     {
-        return ctx.Users.Upsert(user).On(u => u.ExternalId).RunAsync(ct);
+        var results = await ctx.Users
+            .Upsert(user)
+            .On(u => u.ExternalId)
+            .RunAndReturnAsync(ct);
+
+        return results.Single();
     }
 }

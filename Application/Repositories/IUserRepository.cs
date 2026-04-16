@@ -57,5 +57,5 @@ public interface IUserRepository
     /// <param name="user">The user to upsert</param>
     /// <param name="ct">The cancellation token</param>
     /// <returns>The upserted user</returns>
-    Task UpsertByExternalIdAsync(User user, CancellationToken ct);
+    Task<User> UpsertByExternalIdAsync(User user, CancellationToken ct);
 }
