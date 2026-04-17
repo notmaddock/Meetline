@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.Json;
+using Application.Features.User.DeleteUserByExternalId;
 using Application.Features.User.SyncUserFromIdentityProvider;
 using Svix;
 
@@ -45,16 +46,19 @@ public static class ClerkWebhooks
         var evt = JsonSerializer.Deserialize<ClerkWebhookEvent>(payload, SerializerOptions);
         if (evt is null) return Results.BadRequest("Invalid payload");
 
+        var user = evt.Data.Deserialize<ClerkUser>(SerializerOptions);
+
+        if (user is null) return Results.BadRequest("Null user");
+
         switch (evt.Type)
         {
             case "user.created":
             case "user.updated":
-                var user = evt.Data.Deserialize<ClerkUser>(SerializerOptions);
-
-                if (user is null) return Results.BadRequest("Null user");
-
-                Console.WriteLine($"syncing {user.Id}");
                 await mediator.Send(new SyncUserFromIdentityProviderCommand(user.Id));
+                break;
+
+            case "user.deleted":
+                await mediator.Send(new DeleteUserByExternalIdCommand(user.Id));
                 break;
 
             // TODO case "user.deleted": > trigger soft-deletion

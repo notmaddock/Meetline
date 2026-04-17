@@ -12,6 +12,11 @@ public class UserRepository(ApplicationDbContext ctx) : IUserRepository
         return ctx.Users.FindAsync([id], ct).AsTask();
     }
 
+    public Task<User?> GetUserByExternalId(string externalId, CancellationToken ct)
+    {
+        return ctx.Users.FirstOrDefaultAsync(u => u.ExternalId == externalId, ct);
+    }
+
     public Task<Guid?> GetUserIdFromExternalId(string externalId, CancellationToken ct)
     {
         return ctx.Users
@@ -49,5 +54,11 @@ public class UserRepository(ApplicationDbContext ctx) : IUserRepository
             .RunAndReturnAsync(ct);
 
         return results.Single();
+    }
+
+    public async Task DeleteUser(User user, CancellationToken ct)
+    {
+        ctx.Users.Remove(user);
+        await ctx.SaveChangesAsync(ct);
     }
 }

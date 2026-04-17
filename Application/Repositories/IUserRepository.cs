@@ -13,6 +13,14 @@ public interface IUserRepository
     public Task<User?> GetUserById(Guid id, CancellationToken ct);
 
     /// <summary>
+    ///     Gets a User from their external ID
+    /// </summary>
+    /// <param name="externalId">The user's external ID</param>
+    /// <param name="ct">The cancellation token</param>
+    /// <returns>The user if found, null otherwise</returns>
+    Task<User?> GetUserByExternalId(string externalId, CancellationToken ct);
+
+    /// <summary>
     ///     Gets a User's ID from their external (IdP) ID
     /// </summary>
     /// <param name="externalId">The external ID to query</param>
@@ -58,4 +66,12 @@ public interface IUserRepository
     /// <param name="ct">The cancellation token</param>
     /// <returns>The upserted user</returns>
     Task<User> UpsertByExternalIdAsync(User user, CancellationToken ct);
+
+    /// <summary>
+    ///     Deletes a user.
+    /// </summary>
+    /// <param name="user">The user to delete</param>
+    /// <param name="ct">The cancellation token</param>
+    /// <returns>Nothing</returns>
+    Task DeleteUser(User user, CancellationToken ct);
 }
