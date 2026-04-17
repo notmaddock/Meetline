@@ -13,10 +13,6 @@ public class UserScopeInitializationFilter(Mediator.Mediator sender, CurrentUser
 
         if (httpContext.User.Identity?.IsAuthenticated != true) return await next(context);
 
-        var endpointAllowsNonRegistered =
-            httpContext.GetEndpoint()?.Metadata.GetMetadata<AllowNonRegisteredMetadata>() is not null;
-        if (endpointAllowsNonRegistered) return await next(context);
-
         var externalId = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ??
                          httpContext.User.FindFirst("sub")?.Value;
 
