@@ -8,7 +8,10 @@ import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 const config = defineConfig({
-  server: { allowedHosts: ['meetline.maddock.world'] },
+  server: {
+    allowedHosts: ['meetline.maddock.world'],
+    proxy: { '/api': 'http://localhost:5200' },
+  },
   plugins: [
     devtools(),
     tsconfigPaths({ projects: ['./tsconfig.json'] }),
