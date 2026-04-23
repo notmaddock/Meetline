@@ -12,7 +12,7 @@ export const Route = createFileRoute('/_authenticated')({
 
     client.setConfig({
       baseUrl: env.VITE_API_BASE_URL,
-      auth: async() => {
+      auth: async () => {
         return (await context.auth.getToken()) || ''
       },
     })

@@ -12,9 +12,15 @@ function RouteComponent() {
     ...getCurrentUserOptions(),
   })
 
-  return <div className='flex flex-col'>
-    <span>Current user info</span>
-    <code className='max-w-md w-full border border-primary p-2 m-2 bg-primary/30 overflow-hidden wrap-break-word'>{JSON.stringify(data) ?? 'no data'}</code>
-    <Button disabled={isRefetching} onClick={() => refetch()}>Refresh{isRefetching ? 'ing...' : ''}</Button>
-  </div>
+  return (
+    <div className="flex flex-col">
+      <span>Current user info</span>
+      <code className="max-w-md w-full border border-primary p-2 m-2 bg-primary/30 overflow-hidden wrap-break-word">
+        {JSON.stringify(data) ?? 'no data'}
+      </code>
+      <Button disabled={isRefetching} onClick={() => refetch()}>
+        Refresh{isRefetching ? 'ing...' : ''}
+      </Button>
+    </div>
+  )
 }
