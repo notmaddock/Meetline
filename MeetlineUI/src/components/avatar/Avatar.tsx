@@ -2,38 +2,51 @@ import React, { useMemo } from 'react'
 import {
   AvatarBadge,
   AvatarFallback,
+  AvatarGroup as BaseAvatarGroup,
+  AvatarGroupCount,
   AvatarImage,
   Avatar as BaseAvatar,
 } from '../ui/avatar'
 import { getAvatarInitials } from '#/lib/utils/avatar-utils'
 import { MinusIcon } from 'lucide-react'
 import { cn } from '#/lib/utils'
+import type { Presence } from '#/stores/presence'
 
-export type AvatarUser = {
+export type AvatarData = {
   name: string
   avatarURL?: string
 }
 
-export type Presence = 'online' | 'dnd' | 'away' | 'busy' | 'offline'
-
 type BaseAvatarProps = React.ComponentPropsWithoutRef<typeof BaseAvatar>
+type BaseGroupAvatarProps = React.ComponentPropsWithoutRef<typeof BaseAvatarGroup>
 
-export interface SingleAvatarProps extends BaseAvatarProps {
-  variant: 'single'
-  user: AvatarUser
+export type SingleAvatarProps = BaseAvatarProps & {
+  user: AvatarData
   presence?: Presence
 }
 
-export interface GroupAvatarProps extends BaseAvatarProps {
-  variant: 'group'
-  users: AvatarUser[]
+type BaseGroupData = {
+  users: AvatarData[]
 }
 
-export interface ChannelAvatarProps extends BaseAvatarProps {
-  variant: 'channel'
-  name: string
-  avatarURL?: string
+export type CompactGroupAvatarProps = BaseGroupData & BaseAvatarProps & {
+  layout?: 'compact'
 }
+
+export type SpreadGroupAvatarProps = BaseGroupData & BaseGroupAvatarProps & {
+  layout: 'spread'
+}
+
+export type GroupAvatarProps = CompactGroupAvatarProps | SpreadGroupAvatarProps
+
+export type ChannelAvatarProps = BaseAvatarProps & {
+  channel: AvatarData
+}
+
+export type AvatarProps =
+  | ({ variant: 'single' } & SingleAvatarProps)
+  | ({ variant: 'group' } & GroupAvatarProps)
+  | ({ variant: 'channel' } & ChannelAvatarProps)
 
 const presenceColors: Record<Presence, string> = {
   online: 'bg-green-600 dark:bg-green-800',
@@ -43,25 +56,18 @@ const presenceColors: Record<Presence, string> = {
   offline: 'bg-gray-600 dark:bg-gray-800',
 }
 
-export type AvatarProps =
-  | SingleAvatarProps
-  | GroupAvatarProps
-  | ChannelAvatarProps
-
 export function Avatar(props: AvatarProps) {
   switch (props.variant) {
     case 'single':
       return <SingleAvatar {...props} />
-
     case 'group':
       return <GroupAvatar {...props} />
-
     case 'channel':
       return <ChannelAvatar {...props} />
   }
 }
 
-function SingleAvatar({ user, presence, ...props }: SingleAvatarProps) {
+export function SingleAvatar({ user, presence, ...props }: SingleAvatarProps) {
   const { name, avatarURL } = user
 
   const fallback = useMemo(() => getAvatarInitials(name), [name])
@@ -72,24 +78,31 @@ function SingleAvatar({ user, presence, ...props }: SingleAvatarProps) {
       <AvatarFallback>{fallback}</AvatarFallback>
       {presence && (
         <AvatarBadge className={presenceColors[presence]}>
-          {presence === 'dnd' && <MinusIcon className="text-background scale-125" />}
+          {presence === 'dnd' && (
+            <MinusIcon className="text-background scale-125" />
+          )}
         </AvatarBadge>
       )}
     </BaseAvatar>
   )
 }
 
-function GroupAvatar({ users, ...props }: GroupAvatarProps) {
+export function GroupAvatar(props: GroupAvatarProps) {
+  const { users, layout = 'compact' } = props
+
   if (users.length === 1) {
-    return (
-      <SingleAvatar
-        user={users[0]}
-        variant="single"
-        {...(props as BaseAvatarProps)}
-      />
-    )
+    const { layout: _, ...rest } = props
+    return <SingleAvatar user={users[0]} {...(rest as BaseAvatarProps)} />
   }
 
+  if (layout === 'compact') {
+    return <CompactGroupAvatar {...(props as CompactGroupAvatarProps)} />
+  }
+
+  return <SpreadGroupAvatar {...(props as SpreadGroupAvatarProps)} />
+}
+
+function CompactGroupAvatar({ users, ...props }: CompactGroupAvatarProps) {
   const visibleUsers = users.slice(0, 2)
 
   return (
@@ -103,7 +116,7 @@ function GroupAvatar({ users, ...props }: GroupAvatarProps) {
           size={props.size}
           className={cn(
             'absolute h-[75%] w-[75%] border-2 border-background shadow-none after:hidden',
-            i === 0 ? 'top-0 right-0 z-10' : 'bottom-0 left-0 z-0'
+            i === 0 ? 'top-0 right-0 z-10' : 'bottom-0 left-0 z-0',
           )}
         >
           <AvatarImage src={user.avatarURL} alt={user.name} />
@@ -116,17 +129,37 @@ function GroupAvatar({ users, ...props }: GroupAvatarProps) {
   )
 }
 
+function SpreadGroupAvatar({ users, ...props }: SpreadGroupAvatarProps) {
+  const MAX_VISIBLE_USERS = 3
 
-function ChannelAvatar({ className, name, avatarURL, ...props }: ChannelAvatarProps) {
+  const visibleUsers = users.slice(0, MAX_VISIBLE_USERS)
+  const showCount = users.length > MAX_VISIBLE_USERS
+
+  return (
+    <BaseAvatarGroup {...props}>
+      {visibleUsers.map((user, index) => (
+        <SingleAvatar key={index} user={user} />
+      ))}
+      {showCount && (
+        <AvatarGroupCount>+{users.length - MAX_VISIBLE_USERS}</AvatarGroupCount>
+      )}
+    </BaseAvatarGroup>
+  )
+}
+
+export function ChannelAvatar({
+  className,
+  channel,
+  ...props
+}: ChannelAvatarProps) {
+  const { name, avatarURL } = channel
+
   const fallback = useMemo(() => getAvatarInitials(name), [name])
 
   return (
     <BaseAvatar
       {...props}
-      className={cn(
-        'rounded-md **:rounded-md after:rounded-md',
-        className
-      )}
+      className={cn('rounded-md **:rounded-md after:rounded-md', className)}
     >
       <AvatarImage src={avatarURL} />
       <AvatarFallback>{fallback}</AvatarFallback>
