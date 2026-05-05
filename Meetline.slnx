@@ -2,10 +2,10 @@
     <Folder Name="/Solution Items/">
         <File Path="compose.yaml"/>
     </Folder>
-    <Project Path="Application.Tests/Application.Tests.csproj"/>
-    <Project Path="Application/Application.csproj"/>
-    <Project Path="Domain/Domain.csproj"/>
-    <Project Path="Infrastructure.Tests/Infrastructure.Tests.csproj"/>
-    <Project Path="Infrastructure/Infrastructure.csproj"/>
-    <Project Path="Web/Web.csproj"/>
+    <Project Path="src/Application.Tests/Application.Tests.csproj"/>
+    <Project Path="src/Application/Application.csproj"/>
+    <Project Path="src/Domain/Domain.csproj"/>
+    <Project Path="src/Infrastructure.Tests/Infrastructure.Tests.csproj"/>
+    <Project Path="src/Infrastructure/Infrastructure.csproj"/>
+    <Project Path="src/Web/Web.csproj"/>
 </Solution>
