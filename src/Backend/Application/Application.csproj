@@ -19,10 +19,4 @@
         <ProjectReference Include="..\Domain\Domain.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Reference Include="xunit.v3.assert">
-            <HintPath>..\..\..\.nuget\packages\xunit.v3.assert\3.2.2\lib\net8.0\xunit.v3.assert.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-
 </Project>
