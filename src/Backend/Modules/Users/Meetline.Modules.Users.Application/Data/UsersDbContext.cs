@@ -6,5 +6,5 @@ namespace Meetline.Modules.Users.Infrastructure.Database;
 
 public sealed class UsersDbContext(DbContextOptions options) : AuditingDbContext(options)
 {
-    internal DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 }

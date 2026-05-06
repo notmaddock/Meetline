@@ -1,9 +1,10 @@
 using FluentResults;
 using Mediator;
+using Meetline.Modules.Users.Application.Repositories;
+using Meetline.Modules.Users.Application.Services;
 using Meetline.Modules.Users.Application.Users.DTOs.UserResponse;
 using Meetline.Modules.Users.Application.Users.Errors;
 using Microsoft.Extensions.Logging;
-using UserSyncDataMapper = Application.Features.User.DTOs.UserSyncData.UserSyncDataMapper;
 
 namespace Meetline.Modules.Users.Application.Users.Commands.SyncUserFromIdentityProvider;
 

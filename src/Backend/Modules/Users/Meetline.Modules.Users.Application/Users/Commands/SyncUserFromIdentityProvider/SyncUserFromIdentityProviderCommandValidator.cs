@@ -1,4 +1,5 @@
 using FluentValidation;
+using Meetline.Modules.SharedKernel.Application.Validators;
 
 namespace Meetline.Modules.Users.Application.Users.Commands.SyncUserFromIdentityProvider;
 

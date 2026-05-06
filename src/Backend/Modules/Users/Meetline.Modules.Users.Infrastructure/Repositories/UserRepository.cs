@@ -7,45 +7,6 @@ namespace Meetline.Modules.Users.Infrastructure.Repositories;
 
 internal class UserRepository(UsersDbContext ctx) : IUserRepository
 {
-    public Task<User?> GetUserById(Guid id, CancellationToken ct)
-    {
-        return ctx.Users.FindAsync([id], ct).AsTask();
-    }
-
-    public Task<User?> GetUserByExternalId(string externalId, CancellationToken ct)
-    {
-        return ctx.Users.FirstOrDefaultAsync(u => u.ExternalId == externalId, ct);
-    }
-
-    public Task<Guid?> GetUserIdFromExternalId(string externalId, CancellationToken ct)
-    {
-        return ctx.Users
-            .Where(u => u.ExternalId == externalId)
-            .Select(u => (Guid?)u.Id)
-            .FirstOrDefaultAsync(ct);
-    }
-
-    public Task<bool> ExistsAsync(Guid id, CancellationToken ct)
-    {
-        return ctx.Users.AnyAsync(u => u.Id == id, ct);
-    }
-
-    public Task<bool> ExistsByUsernameAsync(string username, CancellationToken ct)
-    {
-        return ctx.Users.AnyAsync(u => u.Username == username, ct);
-    }
-
-    public Task<bool> ExistsByEmailAsync(string email, CancellationToken ct)
-    {
-        return ctx.Users.AnyAsync(u => u.Email == email, ct);
-    }
-
-    public async Task CreateAsync(User user, CancellationToken ct)
-    {
-        await ctx.Users.AddAsync(user, ct);
-        await ctx.SaveChangesAsync(ct);
-    }
-
     public async Task<User> UpsertByExternalIdAsync(User user, CancellationToken ct)
     {
         var results = await ctx.Users
@@ -54,11 +15,5 @@ internal class UserRepository(UsersDbContext ctx) : IUserRepository
             .RunAndReturnAsync(ct);
 
         return results.Single();
-    }
-
-    public async Task DeleteUser(User user, CancellationToken ct)
-    {
-        ctx.Users.Remove(user);
-        await ctx.SaveChangesAsync(ct);
     }
 }
