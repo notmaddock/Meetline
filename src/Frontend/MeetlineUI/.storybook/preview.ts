@@ -1,8 +1,10 @@
 import type { Preview, ReactRenderer } from '@storybook/react-vite'
-import { withThemeByClassName, withThemeByDataAttribute } from '@storybook/addon-themes'
+import {
+    withThemeByClassName,
+    withThemeByDataAttribute,
+} from '@storybook/addon-themes'
 
 import '../src/styles.css'
-
 
 const preview: Preview = {
   parameters: {
@@ -24,11 +26,11 @@ const preview: Preview = {
     withThemeByClassName<ReactRenderer>({
       themes: {
         light: 'light',
-        dark: 'dark'
+          dark: 'dark',
       },
       defaultTheme: 'light',
-    })
-  ]
+    }),
+  ],
 }
 
 export default preview

@@ -10,11 +10,8 @@ WORKDIR /src
 
 RUN --mount=type=bind,source=.,target=. \
     --mount=type=cache,id=nuget,target=/root/.nuget/packages \
-    dotnet restore "src/Backend/Web/Web.csproj"
-
-RUN --mount=type=bind,source=.,target=. \
-    --mount=type=cache,id=nuget,target=/root/.nuget/packages \
-    dotnet publish "src/Backend/Web/Web.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+    dotnet restore "src/Backend/Web/Web.csproj" && \
+    dotnet publish "src/Backend/Web/Web.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --no-restore
 
 FROM base AS final
 WORKDIR /app

@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react'
+import {MinusIcon} from 'lucide-react'
 import {
   AvatarBadge,
   AvatarFallback,
-  AvatarGroup as BaseAvatarGroup,
   AvatarGroupCount,
   AvatarImage,
   Avatar as BaseAvatar,
+    AvatarGroup as BaseAvatarGroup,
 } from '../ui/avatar'
+import type {Presence} from '#/stores/presence'
 import { getAvatarInitials } from '#/lib/utils/avatar-utils'
-import { MinusIcon } from 'lucide-react'
 import { cn } from '#/lib/utils'
-import type { Presence } from '#/stores/presence'
 
 export type AvatarData = {
   name: string
@@ -18,7 +18,9 @@ export type AvatarData = {
 }
 
 type BaseAvatarProps = React.ComponentPropsWithoutRef<typeof BaseAvatar>
-type BaseGroupAvatarProps = React.ComponentPropsWithoutRef<typeof BaseAvatarGroup>
+type BaseGroupAvatarProps = React.ComponentPropsWithoutRef<
+    typeof BaseAvatarGroup
+>
 
 export type SingleAvatarProps = BaseAvatarProps & {
   user: AvatarData
@@ -29,12 +31,14 @@ type BaseGroupData = {
   users: AvatarData[]
 }
 
-export type CompactGroupAvatarProps = BaseGroupData & BaseAvatarProps & {
-  layout?: 'compact'
+export type CompactGroupAvatarProps = BaseGroupData &
+    BaseAvatarProps & {
+    layout?: 'compact'
 }
 
-export type SpreadGroupAvatarProps = BaseGroupData & BaseGroupAvatarProps & {
-  layout: 'spread'
+export type SpreadGroupAvatarProps = BaseGroupData &
+    BaseGroupAvatarProps & {
+    layout: 'spread'
 }
 
 export type GroupAvatarProps = CompactGroupAvatarProps | SpreadGroupAvatarProps

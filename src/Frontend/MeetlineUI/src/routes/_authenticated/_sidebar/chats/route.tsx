@@ -1,13 +1,11 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
-import { getCurrentUserOptions } from '#/client/@tanstack/react-query.gen.ts'
-import { Button } from '#/components/ui/button'
+import {Outlet, createFileRoute} from '@tanstack/react-router'
+import type {Chat} from '#/components/chats/ChatList'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from '#/components/ui/resizable'
-import { ChatList, ChatType, type Chat } from '#/components/chats/ChatList'
+import {ChatList, ChatType} from '#/components/chats/ChatList'
 
 export const Route = createFileRoute('/_authenticated/_sidebar/chats')({
   component: RouteComponent,

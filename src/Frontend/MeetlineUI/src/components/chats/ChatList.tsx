@@ -1,5 +1,5 @@
-import { cn } from '#/lib/utils'
-import type { ComponentProps } from 'react'
+import {ArchiveIcon, BanIcon, Trash2Icon} from 'lucide-react'
+import {Link} from '@tanstack/react-router'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import {
   ContextMenu,
@@ -9,8 +9,8 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '../ui/context-menu'
-import { ArchiveIcon, BanIcon, Trash2Icon } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
+import type {ComponentProps} from 'react'
+import {cn} from '#/lib/utils'
 
 export enum ChatType {
   Direct,
@@ -90,7 +90,11 @@ function ChatListItem({
             <div className="flex px-4 py-2 items-center gap-4 cursor-pointer" />
           }
         >
-          <Link to="/chats/$id" params={{ id: chat.id }} className="flex items-center gap-4 w-full">
+            <Link
+                to="/chats/$id"
+                params={{id: chat.id}}
+                className="flex items-center gap-4 w-full"
+            >
             <Avatar>
               <AvatarFallback>AV</AvatarFallback>
             </Avatar>
