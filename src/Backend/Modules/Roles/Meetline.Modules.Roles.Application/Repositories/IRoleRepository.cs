@@ -1,6 +1,6 @@
-using Domain.Entities;
+using Meetline.Modules.Roles.Domain.Entities;
 
-namespace Application.Repositories;
+namespace Meetline.Modules.Roles.Application.Repositories;
 
 public interface IRoleRepository
 {
