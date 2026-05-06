@@ -13,16 +13,16 @@
     </Folder>
     <Folder Name="/Roles module/">
         <Project
-                Path="src/Backend/Modules/Meetline.Modules.Roles.Application/Meetline.Modules.Roles.Application.csproj"/>
-        <Project Path="src/Backend/Modules/Meetline.Modules.Roles.Domain/Meetline.Modules.Roles.Domain.csproj"/>
+                Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Application/Meetline.Modules.Roles.Application.csproj"/>
+        <Project Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Domain/Meetline.Modules.Roles.Domain.csproj"/>
     </Folder>
     <Folder Name="/Permissions module/">
         <Project
-                Path="src/Backend/Modules/Meetline.Modules.Permissions.Application/Meetline.Modules.Permissions.Application.csproj"/>
+                Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Application/Meetline.Modules.Permissions.Application.csproj"/>
         <Project
-                Path="src/Backend/Modules/Meetline.Modules.Permissions.Contracts/Meetline.Modules.Permissions.Contracts.csproj"/>
+                Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Contracts/Meetline.Modules.Permissions.Contracts.csproj"/>
         <Project
-                Path="src/Backend/Modules/Meetline.Modules.Permissions.Domain/Meetline.Modules.Permissions.Domain.csproj"/>
+                Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Domain/Meetline.Modules.Permissions.Domain.csproj"/>
     </Folder>
 
     

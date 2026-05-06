@@ -4,7 +4,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Meetline.Modules.Common.Domain</RootNamespace>
+        <RootNamespace>Meetline.Modules.SharedKernel.Domain</RootNamespace>
     </PropertyGroup>
 
 </Project>

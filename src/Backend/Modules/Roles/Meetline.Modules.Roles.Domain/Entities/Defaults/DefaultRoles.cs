@@ -1,5 +1,3 @@
-using Meetline.Modules.Common.Domain.Wrappers;
-
 namespace Domain.Entities.Defaults;
 
 public static class DefaultRoles

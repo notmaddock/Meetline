@@ -1,5 +1,4 @@
 using System.Security;
-using Meetline.Modules.Common.Domain.Abstractions;
 
 namespace Domain.Entities;
 

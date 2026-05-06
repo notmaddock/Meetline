@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Common\Meetline.Modules.SharedKernel.Domain\Meetline.Modules.SharedKernel.Domain.csproj"/>
+        <ProjectReference Include="..\..\SharedKernel\Meetline.Modules.SharedKernel.Domain\Meetline.Modules.SharedKernel.Domain.csproj"/>
     </ItemGroup>
 
 </Project>
