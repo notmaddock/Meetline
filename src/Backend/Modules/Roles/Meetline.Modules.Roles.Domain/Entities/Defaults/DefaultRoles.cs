@@ -1,3 +1,5 @@
+using Meetline.Modules.SharedKernel.Domain.Wrappers;
+
 namespace Meetline.Modules.Roles.Domain.Entities.Defaults;
 
 public static class DefaultRoles

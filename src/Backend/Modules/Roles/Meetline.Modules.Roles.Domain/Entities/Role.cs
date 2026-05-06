@@ -1,4 +1,5 @@
-using System.Security;
+using Meetline.Modules.SharedKernel.Domain.Abstractions;
+using Meetline.Modules.SharedKernel.Domain.Wrappers;
 
 namespace Meetline.Modules.Roles.Domain.Entities;
 
