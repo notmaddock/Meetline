@@ -11,4 +11,9 @@
         <ProjectReference Include="..\Meetline.Modules.Roles.Domain\Meetline.Modules.Roles.Domain.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Roles\Commands\"/>
+        <Folder Include="Roles\Queries\"/>
+    </ItemGroup>
+
 </Project>
