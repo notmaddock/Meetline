@@ -1,5 +1,5 @@
 using System.Reflection;
-using Domain.Metadata;
+using Meetline.Modules.Permissions.Contracts.Metadata;
 
 namespace Domain.Registries;
 

@@ -1,4 +1,4 @@
-namespace Domain.Metadata;
+namespace Meetline.Modules.Permissions.Contracts.Metadata;
 
 /// <summary>
 ///     Defines the scopes the permission works in. This controls where the permission may be used and if it can be
