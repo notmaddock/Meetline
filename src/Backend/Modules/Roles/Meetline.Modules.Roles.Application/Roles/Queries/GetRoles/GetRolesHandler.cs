@@ -1,8 +1,12 @@
 using Application.Features.Role.DTOs.RoleResponse;
+using FluentResults;
+using Mediator;
+using Meetline.Modules.Roles.Application.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Role.GetRoles;
 
-public class GetRolesHandler(IRoleRepository repository)
+public class GetRolesHandler(RolesDbContext context)
     : IQueryHandler<GetRolesQuery, Result<ICollection<RoleResponse>>>
 {
     private readonly RoleResponseMapper _mapper = new();
@@ -10,7 +14,8 @@ public class GetRolesHandler(IRoleRepository repository)
     public async ValueTask<Result<ICollection<RoleResponse>>> Handle(GetRolesQuery query,
         CancellationToken cancellationToken)
     {
-        var roles = await repository.GetRolesAsync(cancellationToken);
+        // TODO: Map directly with a Select to make queries smaller
+        var roles = await context.Roles.ToListAsync(cancellationToken);
 
         return _mapper.ToResponse(roles);
     }
