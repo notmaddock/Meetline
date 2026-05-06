@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Meetline.Modules.Users.Application.Users.Commands.DeleteUserByExternalId;
 
-internal class DeleteUserByExternalIdCommandHandler(UsersDbContext context)
+public class DeleteUserByExternalIdCommandHandler(UsersDbContext context)
     : ICommandHandler<DeleteUserByExternalIdCommand, Result>
 {
     public async ValueTask<Result> Handle(DeleteUserByExternalIdCommand byExternalIdCommand,
