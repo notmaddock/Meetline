@@ -1,5 +1,6 @@
 using FluentResults;
 using Mediator;
+using Meetline.Modules.SharedKernel.Application.Errors.ErrorTypes;
 using Meetline.Modules.Users.Application.Users.Commands.SyncUserFromIdentityProvider;
 using Meetline.Modules.Users.Application.Users.DTOs.UserGuidResponse;
 using Meetline.Modules.Users.Application.Users.Queries.GetUserIdByExternalId;
