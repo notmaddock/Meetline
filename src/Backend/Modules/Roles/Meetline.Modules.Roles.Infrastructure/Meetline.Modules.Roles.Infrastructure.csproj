@@ -12,4 +12,8 @@
         <ProjectReference Include="..\Meetline.Modules.Roles.Domain\Meetline.Modules.Roles.Domain.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+    </ItemGroup>
+
 </Project>
