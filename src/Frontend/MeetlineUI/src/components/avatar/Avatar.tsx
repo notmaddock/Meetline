@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react'
-import {MinusIcon} from 'lucide-react'
+import { MinusIcon } from 'lucide-react'
 import {
   AvatarBadge,
   AvatarFallback,
   AvatarGroupCount,
   AvatarImage,
   Avatar as BaseAvatar,
-    AvatarGroup as BaseAvatarGroup,
+  AvatarGroup as BaseAvatarGroup,
 } from '../ui/avatar'
-import type {Presence} from '#/stores/presence'
+import type { Presence } from '#/stores/presence'
 import { getAvatarInitials } from '#/lib/utils/avatar-utils'
 import { cn } from '#/lib/utils'
 
@@ -19,7 +19,7 @@ export type AvatarData = {
 
 type BaseAvatarProps = React.ComponentPropsWithoutRef<typeof BaseAvatar>
 type BaseGroupAvatarProps = React.ComponentPropsWithoutRef<
-    typeof BaseAvatarGroup
+  typeof BaseAvatarGroup
 >
 
 export type SingleAvatarProps = BaseAvatarProps & {
@@ -32,14 +32,14 @@ type BaseGroupData = {
 }
 
 export type CompactGroupAvatarProps = BaseGroupData &
-    BaseAvatarProps & {
+  BaseAvatarProps & {
     layout?: 'compact'
-}
+  }
 
 export type SpreadGroupAvatarProps = BaseGroupData &
-    BaseGroupAvatarProps & {
+  BaseGroupAvatarProps & {
     layout: 'spread'
-}
+  }
 
 export type GroupAvatarProps = CompactGroupAvatarProps | SpreadGroupAvatarProps
 

@@ -1,14 +1,14 @@
 import * as React from 'react'
 
-import {cn} from '#/lib/utils'
-import {Button} from '#/components/ui/button'
+import { cn } from '#/lib/utils'
+import { Button } from '#/components/ui/button'
 import {
-    ChevronLeftIcon,
-    ChevronRightIcon,
-    MoreHorizontalIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MoreHorizontalIcon,
 } from 'lucide-react'
 
-function Pagination({className, ...props}: React.ComponentProps<'nav'>) {
+function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
     <nav
       role="navigation"
@@ -23,7 +23,7 @@ function Pagination({className, ...props}: React.ComponentProps<'nav'>) {
 function PaginationContent({
   className,
   ...props
-                           }: React.ComponentProps<'ul'>) {
+}: React.ComponentProps<'ul'>) {
   return (
     <ul
       data-slot="pagination-content"
@@ -33,30 +33,30 @@ function PaginationContent({
   )
 }
 
-function PaginationItem({...props}: React.ComponentProps<'li'>) {
+function PaginationItem({ ...props }: React.ComponentProps<'li'>) {
   return <li data-slot="pagination-item" {...props} />
 }
 
 type PaginationLinkProps = {
   isActive?: boolean
 } & Pick<React.ComponentProps<typeof Button>, 'size'> &
-    React.ComponentProps<'a'>
+  React.ComponentProps<'a'>
 
 function PaginationLink({
   className,
   isActive,
-                            size = 'icon',
+  size = 'icon',
   ...props
 }: PaginationLinkProps) {
   return (
     <Button
-        variant={isActive ? 'outline' : 'ghost'}
+      variant={isActive ? 'outline' : 'ghost'}
       size={size}
       className={cn(className)}
       nativeButton={false}
       render={
         <a
-            aria-current={isActive ? 'page' : undefined}
+          aria-current={isActive ? 'page' : undefined}
           data-slot="pagination-link"
           data-active={isActive}
           {...props}
@@ -68,7 +68,7 @@ function PaginationLink({
 
 function PaginationPrevious({
   className,
-                                text = 'Previous',
+  text = 'Previous',
   ...props
 }: React.ComponentProps<typeof PaginationLink> & { text?: string }) {
   return (
@@ -86,7 +86,7 @@ function PaginationPrevious({
 
 function PaginationNext({
   className,
-                            text = 'Next',
+  text = 'Next',
   ...props
 }: React.ComponentProps<typeof PaginationLink> & { text?: string }) {
   return (
@@ -105,18 +105,18 @@ function PaginationNext({
 function PaginationEllipsis({
   className,
   ...props
-                            }: React.ComponentProps<'span'>) {
+}: React.ComponentProps<'span'>) {
   return (
     <span
       aria-hidden
       data-slot="pagination-ellipsis"
       className={cn(
         "flex size-8 items-center justify-center [&_svg:not([class*='size-'])]:size-4",
-          className,
+        className,
       )}
       {...props}
     >
-      <MoreHorizontalIcon/>
+      <MoreHorizontalIcon />
       <span className="sr-only">More pages</span>
     </span>
   )

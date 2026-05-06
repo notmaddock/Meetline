@@ -1,11 +1,11 @@
-import {Outlet, createFileRoute} from '@tanstack/react-router'
-import type {Chat} from '#/components/chats/ChatList'
+import { Outlet, createFileRoute } from '@tanstack/react-router'
+import type { Chat } from '#/components/chats/ChatList'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from '#/components/ui/resizable'
-import {ChatList, ChatType} from '#/components/chats/ChatList'
+import { ChatList, ChatType } from '#/components/chats/ChatList'
 
 export const Route = createFileRoute('/_authenticated/_sidebar/chats')({
   component: RouteComponent,

@@ -1,13 +1,13 @@
-import type {Meta, StoryObj} from '@storybook/react-vite'
-import type {AvatarProps} from '#/components/avatar/Avatar.tsx'
-import {Avatar} from '#/components/avatar/Avatar.tsx'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { AvatarProps } from '#/components/avatar/Avatar.tsx'
+import { Avatar } from '#/components/avatar/Avatar.tsx'
 
 const meta = {
-    title: 'UI/Avatar',
-    component: Avatar,
-    parameters: {
-        layout: 'centered',
-    },
+  title: 'UI/Avatar',
+  component: Avatar,
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof Avatar>
 
 export default meta
@@ -32,10 +32,10 @@ const avatarFixtures = {
   },
   channel: {
     variant: 'channel',
-      channel: {
-          name: 'general',
-          avatarURL: 'https://picsum.photos/64',
-      },
+    channel: {
+      name: 'general',
+      avatarURL: 'https://picsum.photos/64',
+    },
   },
 } satisfies {
   [K in AvatarProps['variant']]: Extract<AvatarProps, { variant: K }>
@@ -80,9 +80,9 @@ export const Sizes: Story = {
       <div className="flex flex-col gap-8">
         {sizes.map((size) => (
           <div key={size} className="flex flex-col gap-2">
-              <h3 className="text-sm font-medium text-muted-foreground">
-                  {size}
-              </h3>
+            <h3 className="text-sm font-medium text-muted-foreground">
+              {size}
+            </h3>
             <div className="flex items-center gap-4">
               <Avatar {...avatarFixtures.single} size={size} />
               <Avatar {...avatarFixtures.group} size={size} />
@@ -135,7 +135,7 @@ export const Playground: Story = {
     user: avatarFixtures.single.user,
     users: avatarFixtures.group.users,
     presence: 'online',
-      channel: avatarFixtures.channel.channel,
+    channel: avatarFixtures.channel.channel,
   } as any,
   argTypes: {
     variant: {
