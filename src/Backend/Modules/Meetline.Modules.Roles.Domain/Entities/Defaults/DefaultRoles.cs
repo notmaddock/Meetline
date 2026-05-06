@@ -1,4 +1,4 @@
-using Domain.Wrappers;
+using Meetline.Modules.Common.Domain.Wrappers;
 
 namespace Domain.Entities.Defaults;
 

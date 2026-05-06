@@ -1,6 +1,6 @@
-using Domain.Abstractions;
+using Meetline.Modules.Common.Domain.Abstractions;
 
-namespace Domain.Entities;
+namespace Meetline.Modules.Users.Domain.Entities;
 
 public class User : AuditableEntity
 {

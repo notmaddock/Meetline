@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Numerics;
-using Domain.Metadata;
 
-namespace Domain.Wrappers;
+namespace Meetline.Modules.Common.Domain.Wrappers;
 
 /// <summary>
 ///     Represents a set of permissions. This class is immutable and operations clone the PermissionSet.
@@ -36,29 +35,29 @@ public readonly record struct PermissionSet
     /// <summary>
     ///     Add a new permission to the PermissionSet
     /// </summary>
-    /// <param name="permission">The permission to add</param>
-    public PermissionSet Add(PermissionMetadata permission)
+    /// <param name="bitIndex">The permission's bit index to add</param>
+    public PermissionSet Add(int bitIndex)
     {
-        return new PermissionSet(_bits | (BigInteger.One << permission.BitIndex));
+        return new PermissionSet(_bits | (BigInteger.One << bitIndex));
     }
 
     /// <summary>
     ///     Remove a permission from the PermissionSet
     /// </summary>
-    /// <param name="permission">The permission to remove</param>
-    public PermissionSet Remove(PermissionMetadata permission)
+    /// <param name="bitIndex">The permission's bit index to remove</param>
+    public PermissionSet Remove(int bitIndex)
     {
-        return new PermissionSet(_bits & ~(BigInteger.One << permission.BitIndex));
+        return new PermissionSet(_bits & ~(BigInteger.One << bitIndex));
     }
 
     /// <summary>
     ///     Returns whether the PermissionSet has a permission bit set.
     /// </summary>
-    /// <param name="permission">The permission whose presence to check</param>
-    /// <returns></returns>
-    public bool Has(PermissionMetadata permission)
+    /// <param name="bitIndex">The permission's bit index whose presence to check</param>
+    /// <returns>Whether the PermissionSet contains the permission given by that</returns>
+    public bool Has(int bitIndex)
     {
-        return !(_bits & (BigInteger.One << permission.BitIndex)).IsZero;
+        return !(_bits & (BigInteger.One << bitIndex)).IsZero;
     }
 
     public static PermissionSet operator |(PermissionSet left, PermissionSet right)
