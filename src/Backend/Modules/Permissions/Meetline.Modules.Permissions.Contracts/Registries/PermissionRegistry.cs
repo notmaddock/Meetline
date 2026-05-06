@@ -1,7 +1,7 @@
 using System.Reflection;
 using Meetline.Modules.Permissions.Contracts.Metadata;
 
-namespace Domain.Registries;
+namespace Meetline.Modules.Permissions.Contracts.Registries;
 
 public static class PermissionRegistry
 {

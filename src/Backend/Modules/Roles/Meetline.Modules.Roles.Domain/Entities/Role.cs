@@ -1,6 +1,6 @@
 using System.Security;
 
-namespace Domain.Entities;
+namespace Meetline.Modules.Roles.Domain.Entities;
 
 public class Role : AuditableEntity
 {

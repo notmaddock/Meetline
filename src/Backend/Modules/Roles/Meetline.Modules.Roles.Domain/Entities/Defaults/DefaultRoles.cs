@@ -1,4 +1,4 @@
-namespace Domain.Entities.Defaults;
+namespace Meetline.Modules.Roles.Domain.Entities.Defaults;
 
 public static class DefaultRoles
 {

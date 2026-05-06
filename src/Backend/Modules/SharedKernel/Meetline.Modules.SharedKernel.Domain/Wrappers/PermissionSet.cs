@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Numerics;
 
-namespace Meetline.Modules.Common.Domain.Wrappers;
+namespace Meetline.Modules.SharedKernel.Domain.Wrappers;
 
 /// <summary>
 ///     Represents a set of permissions. This class is immutable and operations clone the PermissionSet.

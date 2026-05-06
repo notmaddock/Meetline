@@ -1,4 +1,4 @@
-namespace Meetline.Modules.Common.Domain.Abstractions;
+namespace Meetline.Modules.SharedKernel.Domain.Abstractions;
 
 public abstract class AuditableEntity
 {

@@ -1,3 +1,5 @@
+using Meetline.Modules.SharedKernel.Domain.Abstractions;
+
 namespace Meetline.Modules.Users.Domain.Entities;
 
 public class User : AuditableEntity
