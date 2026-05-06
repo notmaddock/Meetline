@@ -6,4 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Clerk.BackendAPI"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Meetline.Modules.Users.Application\Meetline.Modules.Users.Application.csproj"/>
+    </ItemGroup>
+
 </Project>

@@ -1,4 +1,8 @@
 using System.Net;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Errors;
+using FluentResults;
+using Meetline.Modules.Users.Application.Services;
 
 namespace Meetline.Modules.Users.Infrastructure.Services.IdentityProviderClientService;
 
