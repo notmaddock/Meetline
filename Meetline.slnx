@@ -2,9 +2,9 @@
     <Folder Name="/Solution Items/">
         <File Path="compose.yaml"/>
     </Folder>
-    <Folder Name="/Common module/">
+    <Folder Name="/Shared kernel/">
         <Project
-                Path="src/Backend/Modules/Common/Meetline.Modules.Common.Domain/Meetline.Modules.Common.Domain.csproj"/>
+                Path="src\Backend\Modules\SharedKernel\Meetline.Modules.SharedKernel.Domain\Meetline.Modules.SharedKernel.Domain.csproj"/>
     </Folder>
     <Folder Name="/Users module/">
         <Project
@@ -25,6 +25,7 @@
                 Path="src/Backend/Modules/Meetline.Modules.Permissions.Domain/Meetline.Modules.Permissions.Domain.csproj"/>
     </Folder>
 
+    
     <Project Path="src/Backend/Application.Tests/Application.Tests.csproj"/>
     <Project Path="src/Backend/Application/Application.csproj"/>
     <Project Path="src/Backend/Infrastructure.Tests/Infrastructure.Tests.csproj"/>

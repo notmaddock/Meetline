@@ -35,6 +35,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Application\Application.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
+        <ProjectReference Include="..\Modules\SharedKernel\Meetline.Modules.SharedKernel.Domain\Meetline.Modules.SharedKernel.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

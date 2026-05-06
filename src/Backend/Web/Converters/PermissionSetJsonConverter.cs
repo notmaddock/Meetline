@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Domain.Wrappers;
+using Meetline.Modules.Common.Domain.Wrappers;
 
 namespace Web.Converters;
 
