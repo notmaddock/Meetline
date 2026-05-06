@@ -1,4 +1,4 @@
-namespace Application.Common.Caching.Keys;
+namespace Meetline.Modules.SharedKernel.Application.CQRS.Caching.Keys;
 
 public static class UserCacheKeys
 {

@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\SharedKernel\Meetline.Modules.SharedKernel.Application\Meetline.Modules.SharedKernel.Application.csproj"/>
         <ProjectReference Include="..\Meetline.Modules.Users.Domain\Meetline.Modules.Users.Domain.csproj"/>
+        <ProjectReference Include="..\Meetline.Modules.SharedKernel.Application\Meetline.Modules.SharedKernel.Application.csproj"/>
     </ItemGroup>
 
 </Project>

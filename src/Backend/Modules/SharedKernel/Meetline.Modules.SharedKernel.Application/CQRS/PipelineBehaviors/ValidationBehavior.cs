@@ -1,9 +1,9 @@
-using Application.Errors.ErrorTypes;
 using FluentResults;
 using FluentValidation;
 using Mediator;
+using Meetline.Modules.SharedKernel.Application.Errors.ErrorTypes;
 
-namespace Application.Common.PipelineBehaviors;
+namespace Meetline.Modules.SharedKernel.Application.CQRS.PipelineBehaviors;
 
 public sealed class ValidationBehavior<TMessage, TResponse>(IEnumerable<IValidator<TMessage>> validators)
     : IPipelineBehavior<TMessage, TResponse>

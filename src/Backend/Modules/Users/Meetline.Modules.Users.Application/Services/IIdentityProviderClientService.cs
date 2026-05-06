@@ -1,7 +1,6 @@
-using Application.Features.User.DTOs.UserSyncData;
 using FluentResults;
 
-namespace Application.Services;
+namespace Meetline.Modules.Users.Application.Services;
 
 public interface IIdentityProviderClientService
 {

@@ -1,11 +1,6 @@
 using System.Net;
-using Application.Features.User.DTOs.UserSyncData;
-using Application.Services;
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Errors;
-using FluentResults;
 
-namespace Infrastructure.Services.IdentityProviderClientService;
+namespace Meetline.Modules.Users.Infrastructure.Services.IdentityProviderClientService;
 
 public class ClerkIdentityProviderClientService(ClerkBackendApi clerk) : IIdentityProviderClientService
 {

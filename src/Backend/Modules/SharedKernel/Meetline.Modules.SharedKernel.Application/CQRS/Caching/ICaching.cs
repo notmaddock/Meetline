@@ -1,4 +1,4 @@
-namespace Application.Common.Caching;
+namespace Meetline.Modules.SharedKernel.Application.CQRS.Caching;
 
 public interface ICacheableRequest
 {

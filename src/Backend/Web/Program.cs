@@ -1,9 +1,9 @@
 using System.Text.Json;
-using Application.Common.Caching;
-using Application.Common.PipelineBehaviors;
 using FluentValidation;
 using Infrastructure;
 using Mediator;
+using Meetline.Modules.SharedKernel.Application.CQRS.Caching;
+using Meetline.Modules.SharedKernel.Application.CQRS.PipelineBehaviors;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Json;

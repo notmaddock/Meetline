@@ -1,6 +1,6 @@
-using Application.Common.Caching;
 using FluentResults;
 using Mediator;
+using Meetline.Modules.SharedKernel.Application.CQRS.Caching;
 using Microsoft.Extensions.Logging;
 
 namespace Meetline.Modules.SharedKernel.Application.CQRS.PipelineBehaviors;

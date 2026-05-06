@@ -1,6 +1,4 @@
-using Meetline.Modules.SharedKernel.Application.Errors;
-
-namespace Application.Errors.ErrorTypes;
+namespace Meetline.Modules.SharedKernel.Application.Errors.ErrorTypes;
 
 public abstract class ValidationError(string code, string title, string message)
     : ApplicationError(code, title, message);
