@@ -21,6 +21,8 @@
         <Project
                 Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Application/Meetline.Modules.Roles.Application.csproj"/>
         <Project Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Domain/Meetline.Modules.Roles.Domain.csproj"/>
+        <Project
+                Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Infrastructure/Meetline.Modules.Roles.Infrastructure.csproj"/>
     </Folder>
     <Folder Name="/Permissions module/">
         <Project

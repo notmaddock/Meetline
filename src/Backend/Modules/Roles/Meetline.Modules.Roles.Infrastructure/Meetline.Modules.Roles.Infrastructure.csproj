@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\SharedKernel\Meetline.Modules.SharedKernel.Infrastructure\Meetline.Modules.SharedKernel.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Meetline.Modules.Roles.Application\Meetline.Modules.Roles.Application.csproj"/>
+        <ProjectReference Include="..\Meetline.Modules.Roles.Domain\Meetline.Modules.Roles.Domain.csproj"/>
+    </ItemGroup>
+
+</Project>
