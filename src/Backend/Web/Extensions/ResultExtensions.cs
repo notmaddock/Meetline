@@ -1,6 +1,6 @@
-using Application.Errors;
 using Application.Errors.ErrorTypes;
 using FluentResults;
+using Meetline.Modules.SharedKernel.Application.Errors;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
