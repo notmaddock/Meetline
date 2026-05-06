@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Application.Common.Validators;
+namespace Meetline.Modules.SharedKernel.Application.Validators;
 
 public static class ExternalIdValidatorExtensions
 {

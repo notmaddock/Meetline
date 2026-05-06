@@ -3,7 +3,7 @@ using FluentResults;
 using Mediator;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Common.PipelineBehaviors;
+namespace Meetline.Modules.SharedKernel.Application.CQRS.PipelineBehaviors;
 
 public sealed class CachingBehavior<TMessage, TResponse>(
     ICacheService cache,
