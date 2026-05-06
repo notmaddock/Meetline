@@ -1,5 +1,7 @@
 using FluentResults;
 using Mediator;
+using Meetline.Modules.SharedKernel.Application.CQRS.Caching;
+using Meetline.Modules.SharedKernel.Application.CQRS.Caching.Keys;
 
 namespace Meetline.Modules.Users.Application.Users.Queries.Exists;
 
