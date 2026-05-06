@@ -1,6 +1,6 @@
-using Domain.Entities;
+using Meetline.Modules.Users.Domain.Entities;
 
-namespace Application.Repositories;
+namespace Meetline.Modules.Users.Application.Repositories;
 
 public interface IUserRepository
 {

@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Meetline.Modules.Users.Domain\Meetline.Modules.Users.Domain.csproj"/>
+    </ItemGroup>
+
 </Project>
