@@ -78,8 +78,7 @@ export function GlobalErrorComponent({
                 <AccordionContent>
                   <ErrorCode
                     message={
-                      (info?.componentStack ??
-                        'No component stack available') as any
+                      info?.componentStack ?? 'No component stack available'
                     }
                   />
                 </AccordionContent>
