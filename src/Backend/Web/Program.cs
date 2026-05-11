@@ -1,6 +1,7 @@
 using System.Text.Json;
 using FluentValidation;
 using Mediator;
+using Meetline.Modules.Roles.Infrastructure;
 using Meetline.Modules.SharedKernel.Application.CQRS.Caching;
 using Meetline.Modules.SharedKernel.Application.CQRS.PipelineBehaviors;
 using Meetline.Modules.Users.Infrastructure;
@@ -52,10 +53,8 @@ builder.Services.AddScoped<CurrentUserScope>();
 
 builder.Services.AddExceptionHandler<BadHttpRequestExceptionHandler>();
 
-builder.Services.AddUsersModule(options =>
-{
-    options.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
-});
+builder.Services.AddUsersModule(_ => { });
+builder.Services.AddRolesModule(_ => { });
 
 var app = builder.Build();
 
