@@ -8,4 +8,8 @@
         <UserSecretsId>582c1413-057d-4eb7-9934-c1748dc48c67</UserSecretsId>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Web\Web.csproj" />
+    </ItemGroup>
+
 </Project>

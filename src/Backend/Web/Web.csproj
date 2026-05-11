@@ -33,6 +33,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Meetline.ServiceDefaults\Meetline.ServiceDefaults.csproj" />
         <ProjectReference Include="..\Modules\Roles\Meetline.Modules.Roles.Infrastructure\Meetline.Modules.Roles.Infrastructure.csproj"/>
         <ProjectReference Include="..\Modules\SharedKernel\Meetline.Modules.SharedKernel.Application\Meetline.Modules.SharedKernel.Application.csproj"/>
         <ProjectReference Include="..\Modules\SharedKernel\Meetline.Modules.SharedKernel.Domain\Meetline.Modules.SharedKernel.Domain.csproj"/>
