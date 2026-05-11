@@ -1,43 +1,34 @@
 <Solution>
     <Folder Name="/Solution Items/">
-        <File Path="compose.yaml"/>
+        <File Path="compose.yaml" />
     </Folder>
     <Folder Name="/Shared kernel/">
-        <Project
-                Path="src/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Infrastructure/Meetline.Modules.SharedKernel.Infrastructure.csproj"/>
-        <Project
-                Path="src/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Domain/Meetline.Modules.SharedKernel.Domain.csproj"/>
-        <Project
-                Path="src/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Application/Meetline.Modules.SharedKernel.Application.csproj"/>
+        <Project Path="src/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Infrastructure/Meetline.Modules.SharedKernel.Infrastructure.csproj" />
+        <Project Path="src/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Domain/Meetline.Modules.SharedKernel.Domain.csproj" />
+        <Project Path="src/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Application/Meetline.Modules.SharedKernel.Application.csproj" />
     </Folder>
     <Folder Name="/Shared kernel tests/">
-        <Project
-                Path="tests/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Domain.Tests/Meetline.Modules.SharedKernel.Domain.Tests.csproj"/>
+        <Project Path="tests/Backend/Modules/SharedKernel/Meetline.Modules.SharedKernel.Domain.Tests/Meetline.Modules.SharedKernel.Domain.Tests.csproj" />
     </Folder>
     <Folder Name="/Users module/">
-        <Project
-                Path="src/Backend/Modules/Users/Meetline.Modules.Users.Application/Meetline.Modules.Users.Application.csproj"/>
-        <Project Path="src/Backend/Modules/Users/Meetline.Modules.Users.Domain/Meetline.Modules.Users.Domain.csproj"/>
-        <Project
-                Path="src/Backend/Modules/Users/Meetline.Modules.Users.Infrastructure/Meetline.Modules.Users.Infrastructure.csproj"/>
+        <Project Path="src/Backend/Modules/Users/Meetline.Modules.Users.Application/Meetline.Modules.Users.Application.csproj" />
+        <Project Path="src/Backend/Modules/Users/Meetline.Modules.Users.Domain/Meetline.Modules.Users.Domain.csproj" />
+        <Project Path="src/Backend/Modules/Users/Meetline.Modules.Users.Infrastructure/Meetline.Modules.Users.Infrastructure.csproj" />
     </Folder>
     <Folder Name="/Roles module/">
-        <Project
-                Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Application/Meetline.Modules.Roles.Application.csproj"/>
-        <Project Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Domain/Meetline.Modules.Roles.Domain.csproj"/>
-        <Project
-                Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Infrastructure/Meetline.Modules.Roles.Infrastructure.csproj"/>
+        <Project Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Application/Meetline.Modules.Roles.Application.csproj" />
+        <Project Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Domain/Meetline.Modules.Roles.Domain.csproj" />
+        <Project Path="src/Backend/Modules/Roles/Meetline.Modules.Roles.Infrastructure/Meetline.Modules.Roles.Infrastructure.csproj" />
     </Folder>
     <Folder Name="/Permissions module/">
-        <Project
-                Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Application/Meetline.Modules.Permissions.Application.csproj"/>
-        <Project
-                Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Contracts/Meetline.Modules.Permissions.Contracts.csproj"/>
-        <Project
-                Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Domain/Meetline.Modules.Permissions.Domain.csproj"/>
+        <Project Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Application/Meetline.Modules.Permissions.Application.csproj" />
+        <Project Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Contracts/Meetline.Modules.Permissions.Contracts.csproj" />
+        <Project Path="src/Backend/Modules/Permissions/Meetline.Modules.Permissions.Domain/Meetline.Modules.Permissions.Domain.csproj" />
     </Folder>
 
     <Folder Name="/Global/">
-        <Project Path="src/Backend/Web/Web.csproj"/>
+        <Project Path="src/Backend/Meetline.ServiceDefaults/Meetline.ServiceDefaults.csproj" />
+        <Project Path="src/Backend/Meetline.AppHost/Meetline.AppHost.csproj" />
+        <Project Path="src/Backend/Web/Web.csproj" />
     </Folder>
 </Solution>
