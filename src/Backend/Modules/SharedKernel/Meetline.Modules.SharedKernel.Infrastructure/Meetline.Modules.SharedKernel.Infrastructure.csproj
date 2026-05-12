@@ -13,5 +13,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Meetline.Modules.SharedKernel.Domain\Meetline.Modules.SharedKernel.Domain.csproj"/>
+        <ProjectReference Include="..\..\..\Meetline.ServiceDefaults\Meetline.ServiceDefaults.csproj"/>
     </ItemGroup>
 </Project>
