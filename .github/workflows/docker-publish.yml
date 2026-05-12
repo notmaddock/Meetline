@@ -1,21 +1,7 @@
 name: Docker
 
 on:
-  push:
-    branches: [ "master" ]
-    tags: [ 'v*.*.*' ]
-    paths:
-      - 'src/Backend/**'
-      - 'Directory.Packages.props'
-      - '.github/workflows/docker-publish.yml'
-      - 'src/Backend/Web/Dockerfile'
-  pull_request:
-    branches: [ "master" ]
-    paths:
-      - 'src/Backend/**'
-      - 'Directory.Packages.props'
-      - '.github/workflows/docker-publish.yml'
-      - 'src/Backend/Web/Dockerfile'
+  workflow_dispatch: 
 
 env:
   REGISTRY: ghcr.io
