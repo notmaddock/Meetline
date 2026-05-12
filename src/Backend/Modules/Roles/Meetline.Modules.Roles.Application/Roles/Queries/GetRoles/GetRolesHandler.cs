@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Meetline.Modules.Roles.Application.Roles.Queries.GetRoles;
 
-public class GetRolesHandler(RolesDbContext context)
+public class GetRolesHandler(IRolesDbContext context)
     : IQueryHandler<GetRolesQuery, Result<ICollection<RoleResponse>>>
 {
     private readonly RoleResponseMapper _mapper = new();

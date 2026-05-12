@@ -6,7 +6,7 @@ using Meetline.Modules.Roles.Application.Roles.Errors;
 
 namespace Meetline.Modules.Roles.Application.Roles.Queries.GetRoleById;
 
-public class GetRoleByIdHandler(RolesDbContext context)
+public class GetRoleByIdHandler(IRolesDbContext context)
     : IQueryHandler<GetRoleByIdQuery, Result<RoleResponse>>
 {
     private readonly RoleResponseMapper _mapper = new();

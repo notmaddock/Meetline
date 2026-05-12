@@ -3,6 +3,6 @@ using Meetline.Modules.Roles.Application.Repositories;
 
 namespace Meetline.Modules.Roles.Infrastructure.Repositories;
 
-internal class RoleRepository(RolesDbContext ctx) : IRoleRepository
+internal class RoleRepository(IRolesDbContext ctx) : IRoleRepository
 {
 }

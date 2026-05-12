@@ -6,7 +6,7 @@ using Meetline.Modules.Roles.Application.Roles.DTOs.RoleResponse;
 
 namespace Meetline.Modules.Roles.Application.Roles.Commands.CreateRole;
 
-public class CreateRoleHandler(RolesDbContext context) : ICommandHandler<CreateRoleCommand, Result<RoleResponse>>
+public class CreateRoleHandler(IRolesDbContext context) : ICommandHandler<CreateRoleCommand, Result<RoleResponse>>
 {
     private readonly CreateRoleRequestMapper _requestMapper = new();
     private readonly RoleResponseMapper _responseMapper = new();

@@ -1,6 +1,4 @@
-using Meetline.Modules.Roles.Application.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Meetline.Modules.Roles.Infrastructure.Data;
 using Microsoft.Extensions.Hosting;
 
 namespace Meetline.Modules.Roles.Infrastructure;
@@ -13,7 +11,7 @@ public static class RolesModule
         {
             var options = new RolesModuleOptions();
             configure(options);
-            
+
             builder.AddNpgsqlDbContext<RolesDbContext>("postgres-roles");
 
             return builder;
