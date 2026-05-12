@@ -52,17 +52,6 @@ namespace Meetline.Modules.Roles.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Hoist = false,
-                            Name = "Everyone",
-                            Permissions = new System.Collections.BitArray(new bool[] { false, false, false, false, false, false, false, false }),
-                            Position = 0
-                        });
                 });
 #pragma warning restore 612, 618
         }

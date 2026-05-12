@@ -28,11 +28,6 @@ namespace Meetline.Modules.Roles.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "CreatedAt", "Hoist", "Name", "Permissions", "Position", "UpdatedAt" },
-                values: new object[] { new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Everyone", new System.Collections.BitArray(new bool[] { false, false, false, false, false, false, false, false }), 0, null });
         }
 
         /// <inheritdoc />
