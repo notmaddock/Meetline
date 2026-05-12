@@ -1,8 +1,8 @@
 using System.Collections;
 using Meetline.Modules.Roles.Domain.Entities;
-using Meetline.Modules.Roles.Domain.Entities.Defaults;
 using Meetline.Modules.SharedKernel.Domain.Wrappers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -17,12 +17,15 @@ public class RoleEntityConfiguration : IEntityTypeConfiguration<Role>
             ba => PermissionSet.FromBitArray(ba)
         );
 
+        var permissionSetComparer = new ValueComparer<PermissionSet>(
+            (l, r) => l.Equals(r),
+            s => s.GetHashCode(),
+            s => s);
+
         builder.HasKey(r => r.Id);
 
         builder.Property(r => r.Permissions)
-            .HasConversion(permissionSetConverter)
+            .HasConversion(permissionSetConverter, permissionSetComparer)
             .HasColumnType("VARBIT");
-
-        builder.HasData(DefaultRoles.EveryoneRole);
     }
 }
