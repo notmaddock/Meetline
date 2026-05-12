@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Meetline.Modules.Users.Infrastructure.Data;
 
-public sealed class UsersDbContext(DbContextOptions options) : AuditingDbContext(options), IUsersDbContext
+public sealed class UsersDbContext(DbContextOptions<UsersDbContext> options)
+    : AuditingDbContext(options), IUsersDbContext
 {
     public DbSet<User> Users { get; set; }
 
