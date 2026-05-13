@@ -40,4 +40,12 @@ var frontend = builder.AddViteApp("frontend", "../../Frontend/MeetlineUI")
     .WithReference(backend)
     .WaitFor(backend);
 
+// TODO This is totally broken even as of 13.3.1 :(
+// var gateway = builder.AddYarp("gateway")
+//     .WithConfiguration(yarp =>
+//     {
+//         yarp.AddRoute(frontend);
+//         yarp.AddRoute("/api/{**catch-all}", backend);
+//     });
+
 builder.Build().Run();
