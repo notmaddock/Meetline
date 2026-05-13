@@ -10,7 +10,7 @@ Meetline is an EdTech-oriented online chat and video conferencing platform.
 
 ### Architecture
 
-Meetline is built on top of ASP.NET and React. It uses .NET Aspire for infrastructure orchestation locally and 
+Meetline is built on top of ASP.NET and React. It uses .NET Aspire for infrastructure orchestration locally and 
 (in the future) deployments and a TanStack Router-based frontend SPA.
 
 The backend's architecture is a modular monolith that could allow separating modules into separate services in the future.
