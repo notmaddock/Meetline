@@ -9,7 +9,6 @@
     <ItemGroup>
         <PackageReference Include="FluentResults"/>
         <PackageReference Include="FluentValidation"/>
-        <PackageReference Include="Mediator.Abstractions"/>
         <PackageReference Include="Riok.Mapperly"/>
     </ItemGroup>
 
