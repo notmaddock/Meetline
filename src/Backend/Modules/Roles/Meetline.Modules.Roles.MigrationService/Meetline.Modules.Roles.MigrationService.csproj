@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\src\Backend\Meetline.ServiceDefaults\Meetline.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\src\Backend\Modules\Roles\Meetline.Modules.Roles.Infrastructure\Meetline.Modules.Roles.Infrastructure.csproj"/>
+      <ProjectReference Include="..\..\..\Meetline.ServiceDefaults\Meetline.ServiceDefaults.csproj" />
+      <ProjectReference Include="..\Meetline.Modules.Roles.Infrastructure\Meetline.Modules.Roles.Infrastructure.csproj" />
     </ItemGroup>
 </Project>
