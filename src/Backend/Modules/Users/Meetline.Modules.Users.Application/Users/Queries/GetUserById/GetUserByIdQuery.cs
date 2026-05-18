@@ -1,18 +1,3 @@
-using FluentResults;
-using Mediator;
-using Meetline.Modules.SharedKernel.Application.CQRS.Caching;
-using Meetline.Modules.SharedKernel.Application.CQRS.Caching.Keys;
-using Meetline.Modules.Users.Application.Users.DTOs.UserResponse;
-
 namespace Meetline.Modules.Users.Application.Users.Queries.GetUserById;
 
-/// <summary>
-///     Gets a user by their ID, used for public queries (does not include private info)
-/// </summary>
-/// <param name="Id">The user's ID</param>
-public record GetUserByIdQuery(Guid Id) : IQuery<Result<UserResponse>>, ICacheableRequest
-{
-    public string CacheKey => UserCacheKeys.ById(Id);
-    public TimeSpan? AbsoluteExpiration => TimeSpan.FromMinutes(60);
-    public TimeSpan? SlidingExpiration => TimeSpan.FromMinutes(5);
-}
+public record GetUserByIdQuery(Guid Id);

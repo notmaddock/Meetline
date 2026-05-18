@@ -1,5 +1,4 @@
 using FluentResults;
-using Mediator;
 using Meetline.Modules.Users.Application.Data;
 using Meetline.Modules.Users.Application.Users.DTOs.UserGuidResponse;
 using Meetline.Modules.Users.Application.Users.Errors;
@@ -7,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Meetline.Modules.Users.Application.Users.Queries.GetUserIdByExternalId;
 
-public class GetUserIdByExternalIdHandler(IUsersDbContext context)
-    : IQueryHandler<GetUserIdByExternalIdQuery, Result<UserGuidResponse>>
+public static class GetUserIdByExternalIdQueryHandler
 {
-    public async ValueTask<Result<UserGuidResponse>> Handle(GetUserIdByExternalIdQuery query,
+    public static async ValueTask<Result<UserGuidResponse>> Handle(GetUserIdByExternalIdQuery query,
+        IUsersDbContext dbContext,
         CancellationToken cancellationToken)
     {
-        var id = await context.Users
+        var id = await dbContext.Users
             .Where(u => u.ExternalId == query.ExternalId)
             .Select(u => (Guid?)u.Id)
             .FirstOrDefaultAsync(cancellationToken);

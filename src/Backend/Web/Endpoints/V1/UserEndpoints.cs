@@ -12,35 +12,5 @@ public static class UserEndpoints
     {
         var users = app.MapGroup("")
             .WithTags("Users");
-
-        users.MapGet("/me", GetCurrentUser)
-            .WithName("GetCurrentUser")
-            .WithSummary("Get the currently authenticated user")
-            .WithDescription("Returns the full profile of the user making the request. Requires a valid JWT token.");
-
-        users.MapGet("/{id:guid}", GetUserById)
-            .WithName("GetUserById")
-            .WithSummary("Get user by ID")
-            .WithDescription("Retrieves a user profile by their unique identifier.");
-    }
-
-    private static async Task<Results<Ok<UserResponse>, ForbidHttpResult, ProblemHttpResult>>
-        GetCurrentUser(Mediator.Mediator mediator, CurrentUserScope scope)
-    {
-        var result = await mediator.Send(new GetUserByIdQuery(scope.Id));
-
-        return result.IsSuccess
-            ? TypedResults.Ok(result.Value)
-            : result.ToProblemHttpResult();
-    }
-
-    private static async Task<Results<Ok<UserResponse>, NotFound, ProblemHttpResult>>
-        GetUserById(Mediator.Mediator mediator, Guid id)
-    {
-        var result = await mediator.Send(new GetUserByIdQuery(id));
-
-        return result.IsSuccess
-            ? TypedResults.Ok(result.Value)
-            : result.ToProblemHttpResult();
     }
 }

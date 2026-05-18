@@ -4,8 +4,8 @@ using Riok.Mapperly.Abstractions;
 namespace Meetline.Modules.Users.Application.Users.DTOs.UserResponse;
 
 [Mapper]
-public partial class UserResponseMapper
+public static partial class UserResponseMapper
 {
     [MapperIgnoreSource(nameof(User.ExternalId))]
-    public partial UserResponse ToResponse(User user);
+    public static partial UserResponse ToResponse(User user);
 }

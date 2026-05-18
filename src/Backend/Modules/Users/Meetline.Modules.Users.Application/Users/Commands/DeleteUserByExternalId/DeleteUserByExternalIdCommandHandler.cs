@@ -1,5 +1,4 @@
 using FluentResults;
-using Mediator;
 using Meetline.Modules.Users.Application.Data;
 using Meetline.Modules.Users.Application.Users.Errors;
 using Microsoft.EntityFrameworkCore;
