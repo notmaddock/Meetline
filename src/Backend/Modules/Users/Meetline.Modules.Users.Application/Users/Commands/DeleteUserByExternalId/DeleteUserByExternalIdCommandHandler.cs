@@ -1,23 +1,16 @@
-using FluentResults;
 using Meetline.Modules.Users.Application.Data;
-using Meetline.Modules.Users.Application.Users.Errors;
 using Microsoft.EntityFrameworkCore;
 
 namespace Meetline.Modules.Users.Application.Users.Commands.DeleteUserByExternalId;
 
-public class DeleteUserByExternalIdCommandHandler(IUsersDbContext context)
-    : ICommandHandler<DeleteUserByExternalIdCommand, Result>
+public static class DeleteUserByExternalIdCommandHandler
 {
-    public async ValueTask<Result> Handle(DeleteUserByExternalIdCommand byExternalIdCommand,
+    public static Task Handle(DeleteUserByExternalIdCommand command,
+        IUsersDbContext context,
         CancellationToken cancellationToken)
     {
-        var user = await context.Users
-            .FirstOrDefaultAsync(u => u.ExternalId == byExternalIdCommand.ExternalId, cancellationToken);
-
-        if (user is null) return Result.Fail(new UserNotFoundError(byExternalIdCommand.ExternalId));
-
-        context.Users.Remove(user);
-
-        return Result.Ok();
+        return context.Users
+            .Where(u => u.ExternalId == command.ExternalId)
+            .ExecuteDeleteAsync(cancellationToken); 
     }
 }
