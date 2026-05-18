@@ -10,8 +10,6 @@ using Web.Configs;
 using Web.Converters;
 using Web.Endpoints;
 using Web.Endpoints.V1;
-using Web.Filters;
-using Web.Scopes;
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,8 +42,6 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.Converters.Add(new PermissionSetJsonConverter());
 });
 
-builder.Services.AddScoped<CurrentUserScope>();
-
 builder.Services.AddExceptionHandler<BadHttpRequestExceptionHandler>();
 
 builder.AddUsersModule(_ => { });
@@ -69,7 +65,7 @@ if (app.Environment.IsDevelopment())
     app.MapGroup("/api/_debug").AllowAnonymous().MapDebugV1Endpoints();
 }
 
-var root = app.MapGroup("").AddEndpointFilter<UserScopeInitializationFilter>();
+var root = app.MapGroup("");
 
 root.MapEndpoints();
 
