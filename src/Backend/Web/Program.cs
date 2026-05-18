@@ -1,9 +1,5 @@
 using System.Text.Json;
-using FluentValidation;
-using Mediator;
 using Meetline.Modules.Roles.Infrastructure;
-using Meetline.Modules.SharedKernel.Application.CQRS.Caching;
-using Meetline.Modules.SharedKernel.Application.CQRS.PipelineBehaviors;
 using Meetline.Modules.Users.Infrastructure;
 using Meetline.ServiceDefaults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,17 +12,16 @@ using Web.Endpoints;
 using Web.Endpoints.V1;
 using Web.Filters;
 using Web.Scopes;
+using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Services.AddMediator(options => { options.ServiceLifetime = ServiceLifetime.Scoped; });
-// TODO re-enable caching
-// builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
-builder.Services.AddValidatorsFromAssembly(typeof(ICacheService).Assembly);
+builder.Host.UseWolverine(options =>
+{
+    
+});
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
