@@ -19,6 +19,8 @@
                 Path="src/Backend/Modules/Users/Meetline.Modules.Users.Infrastructure/Meetline.Modules.Users.Infrastructure.csproj"/>
         <Project
                 Path="src/Backend/Modules/Users/Meetline.Modules.Users.MigrationService/Meetline.Modules.Users.MigrationService.csproj"/>
+        <Project
+                Path="tests/Backend/Modules/Users/Meetline.Modules.Users.Tests/Meetline.Modules.Users.Tests.csproj"/>
     </Folder>
     <Folder Name="/Roles module/">
         <Project

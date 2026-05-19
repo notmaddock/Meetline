@@ -2,6 +2,7 @@ using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Meetline.Modules.Users.Application.Services;
+using Meetline.Modules.Users.Application.Users.Commands.DeleteUser;
 using Meetline.Modules.Users.Application.Users.Commands.UpsertUser;
 using Microsoft.AspNetCore.Mvc;
 using Svix;
@@ -54,7 +55,7 @@ public static class ClerkWebhookEndpoints
         if (webhookEvent.Type is "user.created" or "user.updated")
         {
             var userData = webhookEvent.Data;
-            var email = userData.EmailAddresses.FirstOrDefault()?.EmailAddress;
+            var email = userData.EmailAddresses?.FirstOrDefault()?.EmailAddress;
 
             if (string.IsNullOrEmpty(email)) return Results.BadRequest("No email address found in webhook data.");
 
@@ -67,15 +68,20 @@ public static class ClerkWebhookEndpoints
 
             await bus.InvokeAsync(new UpsertUserCommand(syncData));
         }
+        else if (webhookEvent.Type is "user.deleted")
+        {
+            var userData = webhookEvent.Data;
+            await bus.InvokeAsync(new DeleteUserCommand(userData.Id));
+        }
 
         return Results.Ok();
     }
 
-    private record ClerkWebhookEvent(
+    public record ClerkWebhookEvent(
         [property: JsonPropertyName("data")] ClerkUserData Data,
         [property: JsonPropertyName("type")] string Type);
 
-    private record ClerkUserData(
+    public record ClerkUserData(
         [property: JsonPropertyName("id")] string Id,
         [property: JsonPropertyName("username")]
         string? Username,
@@ -84,9 +90,9 @@ public static class ClerkWebhookEndpoints
         [property: JsonPropertyName("last_name")]
         string? LastName,
         [property: JsonPropertyName("email_addresses")]
-        List<ClerkEmailAddress> EmailAddresses);
+        List<ClerkEmailAddress>? EmailAddresses);
 
-    private record ClerkEmailAddress(
+    public record ClerkEmailAddress(
         [property: JsonPropertyName("email_address")]
         string EmailAddress);
 }
