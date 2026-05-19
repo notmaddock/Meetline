@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Meetline.Modules.Roles.Infrastructure;
+using Meetline.Modules.SharedKernel.Application.Context;
 using Meetline.Modules.Users.Infrastructure;
 using Meetline.ServiceDefaults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,7 +24,9 @@ builder.Host.UseWolverine(options =>
 {
     options.Discovery.IncludeAssembly(typeof(Meetline.Modules.Users.Infrastructure.AssemblyReference).Assembly);
     options.Discovery.IncludeAssembly(typeof(Meetline.Modules.Users.Application.AssemblyReference).Assembly);
-    options.Policies.AddMiddleware<ClaimsPrincipalCallerContextProviderMiddleware>();
+    
+    options.Policies.AddMiddleware<ClaimsPrincipalCallerContextProviderMiddleware>(chain =>
+        chain.Handlers.Any(h => h.Method.GetParameters().Any(p => p.ParameterType == typeof(ICallerContext))));
 });
 
 builder.Services
