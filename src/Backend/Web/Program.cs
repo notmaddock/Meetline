@@ -10,15 +10,20 @@ using Web.Configs;
 using Web.Converters;
 using Web.Endpoints;
 using Web.Endpoints.V1;
+using Web.Middlewares;
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Host.UseWolverine(options =>
 {
-    
+    options.Discovery.IncludeAssembly(typeof(Meetline.Modules.Users.Infrastructure.AssemblyReference).Assembly);
+    options.Discovery.IncludeAssembly(typeof(Meetline.Modules.Users.Application.AssemblyReference).Assembly);
+    options.Policies.AddMiddleware<ClaimsPrincipalCallerContextProviderMiddleware>();
 });
 
 builder.Services
