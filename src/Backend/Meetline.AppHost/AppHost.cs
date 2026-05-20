@@ -7,6 +7,8 @@ var clerkWebhookSecret =
     builder.AddParameterFromConfiguration("clerk-webhook-secret", "Clerk:WebhookSecret", true);
 var clerkPublishableKey = builder.AddParameterFromConfiguration("clerk-publishable-key", "Clerk:PublishableKey");
 
+var redis = builder.AddRedis("redis");
+
 var postgres = builder.AddPostgres("postgres-master")
     .WithDataVolume();
 
@@ -23,6 +25,7 @@ var rolesMigrationService = builder.AddProject<Meetline_Modules_Roles_MigrationS
 
 
 var backend = builder.AddProject<Web>("meetline-backend")
+    .WithReference(redis)
     .WithReference(usersPostgres)
     .WithReference(rolesPostgres)
     .WithReference(usersMigrationService)

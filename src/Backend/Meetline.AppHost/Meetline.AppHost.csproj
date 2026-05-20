@@ -9,16 +9,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Modules\Roles\Meetline.Modules.Roles.MigrationService\Meetline.Modules.Roles.MigrationService.csproj"/>
-        <ProjectReference Include="..\Modules\Users\Meetline.Modules.Users.MigrationService\Meetline.Modules.Users.MigrationService.csproj"/>
-        <ProjectReference Include="..\Web\Web.csproj"/>
+        <ProjectReference Include="..\Modules\Roles\Meetline.Modules.Roles.MigrationService\Meetline.Modules.Roles.MigrationService.csproj" />
+        <ProjectReference Include="..\Modules\Users\Meetline.Modules.Users.MigrationService\Meetline.Modules.Users.MigrationService.csproj" />
+        <ProjectReference Include="..\Web\Web.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost"/>
-        <PackageReference Include="Aspire.Hosting.JavaScript"/>
-        <PackageReference Include="Aspire.Hosting.PostgreSQL"/>
-        <PackageReference Include="Aspire.Hosting.Yarp"/>
+        <PackageReference Include="Aspire.Hosting.AppHost" />
+        <PackageReference Include="Aspire.Hosting.JavaScript" />
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+        <PackageReference Include="Aspire.Hosting.Redis" />
+        <PackageReference Include="Aspire.Hosting.Yarp" />
     </ItemGroup>
 
 </Project>

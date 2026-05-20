@@ -7,8 +7,11 @@
     <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.3.3" />
     <PackageVersion Include="Aspire.Hosting.JavaScript" Version="13.3.3" />
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.3.3" />
+    <PackageVersion Include="Aspire.Hosting.Redis" Version="13.3.4" />
     <PackageVersion Include="Aspire.Hosting.Yarp" Version="13.3.3" />
     <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.3.3" />
+    <PackageVersion Include="Aspire.StackExchange.Redis" Version="13.3.4" />
+    <PackageVersion Include="Aspire.StackExchange.Redis.DistributedCaching" Version="13.3.4" />
     <PackageVersion Include="Clerk.BackendAPI" Version="0.15.4" />
     <PackageVersion Include="FlexLabs.EntityFrameworkCore.Upsert" Version="10.0.0" />
     <PackageVersion Include="FluentResults" Version="4.0.0" />
@@ -21,7 +24,8 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Abstractions" Version="10.0.7" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.7" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8"/>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Hybrid" Version="10.6.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.8" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.6.0" />

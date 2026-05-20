@@ -6,7 +6,7 @@ namespace Meetline.Modules.Users.Application.Users.Commands.SyncUserFromIdentity
 
 public static class SyncUserFromIdentityProviderCommandHandler
 {
-    public static async Task Handle(
+    public static async Task<Guid> Handle(
         SyncUserFromIdentityProviderCommand command,
         IIdentityProviderClientService identityProvider,
         IMessageBus bus,
@@ -18,6 +18,6 @@ public static class SyncUserFromIdentityProviderCommandHandler
             throw new InvalidOperationException(
                 $"Failed to sync user from identity provider: {result.Errors.FirstOrDefault()?.Message}");
 
-        await bus.InvokeAsync(new UpsertUserCommand(result.Value), ct);
+        return await bus.InvokeAsync<Guid>(new UpsertUserCommand(result.Value), ct);
     }
 }
