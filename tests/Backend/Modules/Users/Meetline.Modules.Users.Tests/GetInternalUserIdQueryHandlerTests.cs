@@ -25,10 +25,13 @@ public sealed class GetInternalUserIdQueryHandlerTests : UsersDbTestBase
 
         var query = new GetInternalUserIdQuery(externalId);
         var busMock = new Mock<IMessageBus>();
+#pragma warning disable EXTEXP0018
+        var cache = new MockHybridCache();
+#pragma warning restore EXTEXP0018
 
         // Act
         var result =
-            await GetInternalUserIdQueryHandler.Handle(query, Context, busMock.Object,
+            await GetInternalUserIdQueryHandler.Handle(query, Context, busMock.Object, cache,
                 TestContext.Current.CancellationToken);
 
         // Assert
@@ -46,29 +49,22 @@ public sealed class GetInternalUserIdQueryHandlerTests : UsersDbTestBase
         var query = new GetInternalUserIdQuery(externalId);
 
         var busMock = new Mock<IMessageBus>();
-        busMock.Setup(b => b.InvokeAsync(It.Is<SyncUserFromIdentityProviderCommand>(c => c.ExternalId == externalId),
+        busMock.Setup(b => b.InvokeAsync<Guid>(It.Is<SyncUserFromIdentityProviderCommand>(c => c.ExternalId == externalId),
                 It.IsAny<CancellationToken>()))
-            .Returns(async () =>
-            {
-                Context.Users.Add(new User
-                {
-                    Id = syncedUserId,
-                    ExternalId = externalId,
-                    Username = "synced",
-                    Email = "synced@example.com"
-                });
-                await Context.SaveChangesAsync();
-            });
+            .ReturnsAsync(syncedUserId);
+#pragma warning disable EXTEXP0018
+        var cache = new MockHybridCache();
+#pragma warning restore EXTEXP0018
 
         // Act
         var result =
-            await GetInternalUserIdQueryHandler.Handle(query, Context, busMock.Object,
+            await GetInternalUserIdQueryHandler.Handle(query, Context, busMock.Object, cache,
                 TestContext.Current.CancellationToken);
 
         // Assert
         Assert.Equal(syncedUserId, result);
         busMock.Verify(
-            b => b.InvokeAsync(It.Is<SyncUserFromIdentityProviderCommand>(c => c.ExternalId == externalId),
+            b => b.InvokeAsync<Guid>(It.Is<SyncUserFromIdentityProviderCommand>(c => c.ExternalId == externalId),
                 It.IsAny<CancellationToken>()), Times.Once);
     }
 }

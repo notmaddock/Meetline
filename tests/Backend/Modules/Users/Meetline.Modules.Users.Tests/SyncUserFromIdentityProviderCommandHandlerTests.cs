@@ -39,7 +39,7 @@ public sealed class SyncUserFromIdentityProviderCommandHandlerTests
             CancellationToken.None);
 
         // Assert
-        busMock.Verify(b => b.InvokeAsync(
+        busMock.Verify(b => b.InvokeAsync<Guid>(
                 It.Is<UpsertUserCommand>(c => c.Data == syncData),
                 It.IsAny<CancellationToken>()),
             Times.Once);

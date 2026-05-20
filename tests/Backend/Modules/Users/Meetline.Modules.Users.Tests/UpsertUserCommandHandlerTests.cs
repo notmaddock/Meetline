@@ -30,7 +30,10 @@ public sealed class UpsertUserCommandHandlerTests
             .ReturnsAsync((User u, CancellationToken _) => u);
 
         // Act
-        await UpsertUserCommandHandler.Handle(command, repositoryMock.Object, CancellationToken.None);
+#pragma warning disable EXTEXP0018
+        var cache = new MockHybridCache();
+#pragma warning restore EXTEXP0018
+        await UpsertUserCommandHandler.Handle(command, repositoryMock.Object, cache, CancellationToken.None);
 
         // Assert
         repositoryMock.Verify(r => r.UpsertByExternalIdAsync(It.IsAny<User>(), It.IsAny<CancellationToken>()),

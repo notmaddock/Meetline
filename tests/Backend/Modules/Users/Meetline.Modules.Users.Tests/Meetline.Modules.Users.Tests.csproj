@@ -8,23 +8,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector"/>
-        <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
-        <PackageReference Include="xunit.v3"/>
-        <PackageReference Include="xunit.runner.visualstudio"/>
-        <PackageReference Include="Moq"/>
+        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="JetBrains.Annotations" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+        <PackageReference Include="xunit.v3" />
+        <PackageReference Include="xunit.runner.visualstudio" />
+        <PackageReference Include="Moq" />
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Xunit"/>
+        <Using Include="Xunit" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="../../../../../src/Backend/Modules/Users/Meetline.Modules.Users.Application/Meetline.Modules.Users.Application.csproj"/>
-        <ProjectReference Include="../../../../../src/Backend/Modules/Users/Meetline.Modules.Users.Infrastructure/Meetline.Modules.Users.Infrastructure.csproj"/>
-        <ProjectReference Include="../../../../../src/Backend/Web/Web.csproj"/>
+        <ProjectReference Include="../../../../../src/Backend/Modules/Users/Meetline.Modules.Users.Application/Meetline.Modules.Users.Application.csproj" />
+        <ProjectReference Include="../../../../../src/Backend/Modules/Users/Meetline.Modules.Users.Infrastructure/Meetline.Modules.Users.Infrastructure.csproj" />
+        <ProjectReference Include="../../../../../src/Backend/Web/Web.csproj" />
     </ItemGroup>
 
 </Project>

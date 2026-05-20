@@ -21,8 +21,11 @@ public sealed class DeleteUserCommandHandlerTests : UsersDbTestBase
         await Context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         var command = new DeleteUserCommand(externalId);
+#pragma warning disable EXTEXP0018
+        var cache = new MockHybridCache();
+#pragma warning restore EXTEXP0018
 
-        await DeleteUserCommandHandler.Handle(command, Context, CancellationToken.None);
+        await DeleteUserCommandHandler.Handle(command, Context, cache, CancellationToken.None);
 
         var exists = await Context.Users.AnyAsync(u => u.ExternalId == externalId,
             TestContext.Current.CancellationToken);
@@ -54,8 +57,11 @@ public sealed class DeleteUserCommandHandlerTests : UsersDbTestBase
         await Context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         var command = new DeleteUserCommand(targetExternalId);
+#pragma warning disable EXTEXP0018
+        var cache = new MockHybridCache();
+#pragma warning restore EXTEXP0018
 
-        await DeleteUserCommandHandler.Handle(command, Context, CancellationToken.None);
+        await DeleteUserCommandHandler.Handle(command, Context, cache, CancellationToken.None);
 
         var targetExists = await Context.Users.AnyAsync(u => u.ExternalId == targetExternalId,
             TestContext.Current.CancellationToken);
