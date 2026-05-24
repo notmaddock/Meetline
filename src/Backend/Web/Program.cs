@@ -6,11 +6,14 @@ using Meetline.ServiceDefaults;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.SignalR;
 using Scalar.AspNetCore;
 using Web.Configs;
 using Web.Converters;
 using Web.Endpoints;
 using Web.Endpoints.V1;
+using Web.Hubs;
+using Web.Hubs.Filters;
 using Web.Middlewares;
 using Wolverine;
 
@@ -28,6 +31,25 @@ builder.Host.UseWolverine(options =>
     options.Policies.AddMiddleware<ClaimsPrincipalCallerContextProviderMiddleware>(chain =>
         chain.Handlers.Any(h => h.Method.GetParameters().Any(p => p.ParameterType == typeof(ICallerContext))));
 });
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.SetIsOriginAllowed(origin =>
+            {
+                if (Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                    return uri.Host == "localhost" || uri.Host == "127.0.0.1" || uri.Host.EndsWith(".maddock.world");
+
+                return false;
+            })
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
+builder.Services.AddSignalR(options => { options.AddFilter<IdentityResolutionFilter>(); });
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -59,6 +81,8 @@ var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
+app.UseCors();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -76,5 +100,7 @@ if (app.Environment.IsDevelopment())
 var root = app.MapGroup("");
 
 root.MapEndpoints();
+
+app.MapHub<GatewayHub>("/api/gateway");
 
 app.Run();
