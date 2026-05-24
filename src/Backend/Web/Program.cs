@@ -53,7 +53,26 @@ builder.Services.AddSignalR(options => { options.AddFilter<IdentityResolutionFil
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => { builder.Configuration.GetSection("JwtBearer").Bind(options); });
+    .AddJwtBearer(options =>
+    {
+        builder.Configuration.GetSection("JwtBearer").Bind(options);
+
+        options.Events = new JwtBearerEvents
+        {
+            // Read access token from ?access_token query param if going to gateway since WS doesn't support headers
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+
+                var path = context.HttpContext.Request.Path;
+                if (!string.IsNullOrEmpty(accessToken) &&
+                    path.StartsWithSegments("/api/gateway"))
+                    context.Token = accessToken;
+
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 builder.Services.AddAuthorizationBuilder()
     .SetFallbackPolicy(new AuthorizationPolicyBuilder()
