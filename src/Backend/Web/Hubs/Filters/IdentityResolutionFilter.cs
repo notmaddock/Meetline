@@ -6,7 +6,7 @@ using Wolverine;
 
 namespace Web.Hubs.Filters;
 
-public class IdentityResolutionFilter(IMessageBus bus) : IHubFilter
+public class IdentityResolutionFilter : IHubFilter
 {
     public async Task OnConnectedAsync(HubLifetimeContext context, Func<HubLifetimeContext, Task> next)
     {
@@ -18,8 +18,13 @@ public class IdentityResolutionFilter(IMessageBus bus) : IHubFilter
 
             if (!string.IsNullOrEmpty(externalId))
             {
-                var internalId = await bus.InvokeAsync<Guid>(new GetInternalUserIdQuery(externalId));
-                context.Context.Items["HubUser"] = new WebProvidedCallerContext(internalId, externalId);
+                var httpContext = context.Context.GetHttpContext();
+
+                if (httpContext?.RequestServices.GetService(typeof(IMessageBus)) is IMessageBus bus)
+                {
+                    var internalId = await bus.InvokeAsync<Guid>(new GetInternalUserIdQuery(externalId));
+                    context.Context.Items["HubUser"] = new WebProvidedCallerContext(internalId, externalId);
+                }
             }
         }
 
