@@ -43,7 +43,15 @@ class Gateway {
     try {
       await this.connection.start()
     } catch (err) {
-      console.error('SignalR connection failed to start', err)
+      console.error(
+        'SignalR connection failed to start, retrying in 5s...',
+        err,
+      )
+      setTimeout(() => {
+        if (this.connection) {
+          this.connect()
+        }
+      }, 5000)
     }
   }
 
