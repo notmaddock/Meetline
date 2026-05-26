@@ -30,7 +30,8 @@ builder.Services.AddCors(options =>
         policy.SetIsOriginAllowed(origin =>
             {
                 if (Uri.TryCreate(origin, UriKind.Absolute, out var uri))
-                    return uri.Host == "localhost" || uri.Host == "127.0.0.1" || uri.Host.EndsWith(".maddock.world");
+                    return uri.Host == "localhost" || uri.Host == "127.0.0.1" || uri.Host == "maddock.world" ||
+                           uri.Host.EndsWith(".maddock.world");
 
                 return false;
             })
@@ -53,12 +54,12 @@ builder.Services
             // Read access token from ?access_token query param if going to gateway since WS doesn't support headers
             OnMessageReceived = context =>
             {
-                var accessToken = context.Request.Query["access_token"];
-
                 var path = context.HttpContext.Request.Path;
-                if (!string.IsNullOrEmpty(accessToken) &&
-                    path.StartsWithSegments("/api/gateway"))
-                    context.Token = accessToken;
+                if (path.StartsWithSegments("/api/gateway"))
+                {
+                    var accessToken = context.Request.Query["access_token"];
+                    if (!string.IsNullOrEmpty(accessToken)) context.Token = accessToken;
+                }
 
                 return Task.CompletedTask;
             }
