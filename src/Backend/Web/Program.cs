@@ -30,8 +30,12 @@ builder.Services.AddCors(options =>
         policy.SetIsOriginAllowed(origin =>
             {
                 if (Uri.TryCreate(origin, UriKind.Absolute, out var uri))
-                    return uri.Host == "localhost" || uri.Host == "127.0.0.1" || uri.Host == "maddock.world" ||
-                           uri.Host.EndsWith(".maddock.world");
+                {
+                    var isLocal = uri.Host == "localhost" || uri.Host == "127.0.0.1";
+                    if (isLocal) return builder.Environment.IsDevelopment();
+
+                    return uri.Host == "maddock.world" || uri.Host.EndsWith(".maddock.world");
+                }
 
                 return false;
             })
