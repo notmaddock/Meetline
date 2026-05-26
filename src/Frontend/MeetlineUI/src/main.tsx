@@ -13,6 +13,7 @@ import {
   EmptyTitle,
 } from '#/components/ui/empty.tsx'
 import { routeTree } from './routeTree.gen'
+import { GatewayManager } from './lib/gateway/GatewayManager'
 import type { RouterContext } from '#/routes/__root.tsx'
 
 const queryClient = new QueryClient()
@@ -49,6 +50,7 @@ if (!rootElement.innerHTML) {
     >
       <QueryClientProvider client={queryClient}>
         <App />
+        <GatewayManager />
         <Toaster theme="dark" position="top-center" />
       </QueryClientProvider>
     </ClerkProvider>,

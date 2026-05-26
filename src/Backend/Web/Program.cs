@@ -23,15 +23,6 @@ builder.AddServiceDefaults();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Host.UseWolverine(options =>
-{
-    options.Discovery.IncludeAssembly(typeof(AssemblyReference).Assembly);
-    options.Discovery.IncludeAssembly(typeof(Meetline.Modules.Users.Application.AssemblyReference).Assembly);
-
-    options.Policies.AddMiddleware<ClaimsPrincipalCallerContextProviderMiddleware>(chain =>
-        chain.Handlers.Any(h => h.Method.GetParameters().Any(p => p.ParameterType == typeof(ICallerContext))));
-});
-
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -95,6 +86,28 @@ builder.Services.AddExceptionHandler<BadHttpRequestExceptionHandler>();
 
 builder.AddUsersModule(_ => { });
 builder.AddRolesModule(_ => { });
+
+builder.Host.UseWolverine(options =>
+{
+    options.Discovery.IncludeAssembly(typeof(AssemblyReference).Assembly);
+    options.Discovery.IncludeAssembly(typeof(Meetline.Modules.Users.Application.AssemblyReference).Assembly);
+
+    var opaqueInterfaces = builder.Services
+        .Where(descriptor => 
+            descriptor.ServiceType.IsInterface && 
+            descriptor.ImplementationFactory != null)
+        .Select(descriptor => descriptor.ServiceType)
+        .Distinct()
+        .ToList();
+
+    foreach (var serviceType in opaqueInterfaces)
+    {
+        options.CodeGeneration.AlwaysUseServiceLocationFor(serviceType);
+    }
+
+    options.Policies.AddMiddleware<ClaimsPrincipalCallerContextProviderMiddleware>(chain =>
+        chain.Handlers.Any(h => h.Method.GetParameters().Any(p => p.ParameterType == typeof(ICallerContext))));
+});
 
 var app = builder.Build();
 
