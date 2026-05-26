@@ -20,8 +20,9 @@ public class IdentityResolutionFilter : IHubFilter
             {
                 var httpContext = context.Context.GetHttpContext();
 
-                if (httpContext?.RequestServices.GetService(typeof(IMessageBus)) is IMessageBus bus)
+                if (httpContext != null)
                 {
+                    var bus = httpContext.RequestServices.GetRequiredService<IMessageBus>();
                     var internalId = await bus.InvokeAsync<Guid>(new GetInternalUserIdQuery(externalId));
                     context.Context.Items["HubUser"] = new WebProvidedCallerContext(internalId, externalId);
                 }
