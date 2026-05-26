@@ -6,16 +6,20 @@ export function GatewayManager() {
   const { isLoaded, isSignedIn, getToken } = useAuth()
 
   useEffect(() => {
-    if (!isLoaded || !isSignedIn) return
+    if (isLoaded && isSignedIn) {
+      gateway.initialize(getToken)
+    }
+  }, [isLoaded, isSignedIn, getToken])
 
-    gateway.initialize(getToken)
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn) return
 
     gateway.connect()
 
     return () => {
       gateway.disconnect()
     }
-  }, [isLoaded, isSignedIn, getToken])
+  }, [isLoaded, isSignedIn])
 
   return null
 }
