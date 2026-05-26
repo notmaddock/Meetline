@@ -12,6 +12,7 @@ class Gateway {
   private connection: HubConnection | null = null
   private tokenGetter: TokenGetter | null = null
   private disconnectPromise: Promise<void> | null = null
+  private reconnectTimeoutId: ReturnType<typeof setTimeout> | null = null
 
   initialize(getToken: TokenGetter) {
     this.tokenGetter = getToken
@@ -28,28 +29,38 @@ class Gateway {
   }
 
   async connect() {
+    if (this.reconnectTimeoutId) {
+      clearTimeout(this.reconnectTimeoutId)
+      this.reconnectTimeoutId = null
+    }
+
     if (this.disconnectPromise) {
       await this.disconnectPromise
     }
 
-    if (!this.connection) {
+    const connectionToStart = this.connection
+    if (!connectionToStart) {
       throw new Error('Gateway not initialized')
     }
 
-    if (this.connection.state !== HubConnectionState.Disconnected) {
+    if (connectionToStart.state !== HubConnectionState.Disconnected) {
       return
     }
 
     try {
-      await this.connection.start()
+      await connectionToStart.start()
     } catch (err) {
+      if (this.connection !== connectionToStart) {
+        return
+      }
+
       console.error(
         'SignalR connection failed to start, retrying in 5s...',
         err,
       )
-      const currentConnection = this.connection
-      setTimeout(() => {
-        if (this.connection === currentConnection) {
+
+      this.reconnectTimeoutId = setTimeout(() => {
+        if (this.connection === connectionToStart) {
           this.connect()
         }
       }, 5000)
@@ -57,15 +68,25 @@ class Gateway {
   }
 
   async disconnect() {
+    if (this.reconnectTimeoutId) {
+      clearTimeout(this.reconnectTimeoutId)
+      this.reconnectTimeoutId = null
+    }
+
     if (!this.connection) return
 
     const connectionToStop = this.connection
     this.connection = null
     this.tokenGetter = null
 
-    this.disconnectPromise = connectionToStop.stop().then(() => {
-      this.disconnectPromise = null
-    })
+    this.disconnectPromise = connectionToStop
+      .stop()
+      .catch((err) => {
+        console.error('Failed to stop gateway connection gracefully:', err)
+      })
+      .finally(() => {
+        this.disconnectPromise = null
+      })
 
     await this.disconnectPromise
   }
