@@ -15,7 +15,7 @@ export function GatewayManager() {
     return () => {
       gateway.disconnect()
     }
-  }, [isSignedIn])
+  }, [isLoaded, isSignedIn, getToken])
 
   return null
 }
