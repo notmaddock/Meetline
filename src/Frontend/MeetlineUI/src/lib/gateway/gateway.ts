@@ -4,8 +4,7 @@ import {
   LogLevel,
 } from '@microsoft/signalr'
 import { env } from '#/env.ts'
-import type {
-  HubConnection} from '@microsoft/signalr';
+import type { HubConnection } from '@microsoft/signalr'
 
 type TokenGetter = () => Promise<string | null>
 
