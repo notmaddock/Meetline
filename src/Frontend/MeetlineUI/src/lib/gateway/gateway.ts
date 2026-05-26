@@ -14,9 +14,9 @@ class Gateway {
   private disconnectPromise: Promise<void> | null = null
 
   initialize(getToken: TokenGetter) {
-    if (this.connection) return
-
     this.tokenGetter = getToken
+
+    if (this.connection) return
 
     this.connection = new HubConnectionBuilder()
       .withUrl(`${env.VITE_API_BASE_URL}/api/gateway`, {
