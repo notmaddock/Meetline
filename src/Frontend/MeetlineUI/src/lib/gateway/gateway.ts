@@ -47,8 +47,9 @@ class Gateway {
         'SignalR connection failed to start, retrying in 5s...',
         err,
       )
+      const currentConnection = this.connection
       setTimeout(() => {
-        if (this.connection) {
+        if (this.connection === currentConnection) {
           this.connect()
         }
       }, 5000)

@@ -14,7 +14,9 @@ export function GatewayManager() {
   useEffect(() => {
     if (!isLoaded || !isSignedIn) return
 
-    gateway.connect()
+    gateway.connect().catch((err) => {
+      console.error('Failed to connect to gateway:', err)
+    })
 
     return () => {
       gateway.disconnect()
