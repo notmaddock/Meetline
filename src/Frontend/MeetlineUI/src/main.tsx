@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { ClerkProvider, useAuth, useUser } from '@clerk/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Toaster } from '#/components/ui/sonner.tsx'
 import { env } from '#/env.ts'
 import { Spinner } from '#/components/ui/spinner.tsx'
 import {
@@ -14,6 +13,7 @@ import {
 } from '#/components/ui/empty.tsx'
 import { routeTree } from './routeTree.gen'
 import { GatewayManager } from './lib/gateway/GatewayManager'
+import { Toasters } from './lib/notifications/toasters'
 import type { RouterContext } from '#/routes/__root.tsx'
 
 const queryClient = new QueryClient()
@@ -51,16 +51,7 @@ if (!rootElement.innerHTML) {
       <QueryClientProvider client={queryClient}>
         <App />
         <GatewayManager />
-        <Toaster theme="dark" toastOptions={{
-          style: {
-            background: 'rgba(0, 0, 0, .4)',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#fff',
-            userSelect: 'none'
-          }
-        }} />
+        <Toasters />
       </QueryClientProvider>
     </ClerkProvider>,
   )
