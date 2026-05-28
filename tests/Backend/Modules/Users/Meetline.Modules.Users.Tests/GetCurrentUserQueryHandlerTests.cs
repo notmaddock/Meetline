@@ -12,12 +12,11 @@ public sealed class GetCurrentUserQueryHandlerTests : UsersDbTestBase
     {
         // Arrange
         var userId = Guid.NewGuid();
-        const string externalId = "user_caller";
 
         var user = new User
         {
             Id = userId,
-            ExternalId = externalId,
+            ExternalId = "user_caller",
             Username = "calleruser",
             Email = "caller@example.com",
             FirstName = "John",
@@ -30,7 +29,6 @@ public sealed class GetCurrentUserQueryHandlerTests : UsersDbTestBase
         var query = new GetCurrentUserQuery();
         var callerMock = new Mock<ICallerContext>();
         callerMock.Setup(c => c.UserId).Returns(userId);
-        callerMock.Setup(c => c.UserExternalId).Returns(externalId);
 
         // Act
         var result = await GetCurrentUserQueryHandler.Handle(query, callerMock.Object, Context,
@@ -50,12 +48,10 @@ public sealed class GetCurrentUserQueryHandlerTests : UsersDbTestBase
     {
         // Arrange
         var userId = Guid.NewGuid();
-        const string externalId = "user_caller";
 
         var query = new GetCurrentUserQuery();
         var callerMock = new Mock<ICallerContext>();
         callerMock.Setup(c => c.UserId).Returns(userId);
-        callerMock.Setup(c => c.UserExternalId).Returns(externalId);
 
         // Act
         var result = await GetCurrentUserQueryHandler.Handle(query, callerMock.Object, Context,
