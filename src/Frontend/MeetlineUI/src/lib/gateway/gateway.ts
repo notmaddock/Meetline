@@ -4,6 +4,7 @@ import {
   LogLevel,
 } from '@microsoft/signalr'
 import { env } from '#/env.ts'
+import { mountEventHandlers } from './events'
 import type { HubConnection } from '@microsoft/signalr'
 
 type TokenGetter = () => Promise<string | null>
@@ -26,6 +27,8 @@ class Gateway {
       .withAutomaticReconnect()
       .configureLogging(LogLevel.Information)
       .build()
+
+    mountEventHandlers(this.connection)
   }
 
   async connect() {

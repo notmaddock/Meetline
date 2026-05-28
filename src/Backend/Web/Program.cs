@@ -3,18 +3,22 @@ using Meetline.Modules.Roles.Infrastructure;
 using Meetline.Modules.SharedKernel.Application.Context;
 using Meetline.Modules.Users.Infrastructure;
 using Meetline.ServiceDefaults;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.SignalR;
 using Scalar.AspNetCore;
+using Web.Auth;
 using Web.Configs;
 using Web.Converters;
 using Web.Endpoints;
 using Web.Endpoints.V1;
 using Web.Hubs;
 using Web.Hubs.Filters;
+using Web.Hubs.Providers;
 using Web.Middlewares;
+using Web.Scopes;
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +26,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICallerContextAccessor, ScopedCallerContextAccessor>();
+builder.Services
+    .AddTransient<IClaimsTransformation,
+        InternalUserIdClaimsTransformation>();
+builder.Services.AddSingleton<IUserIdProvider, InternalUserIdProvider>();
 
 builder.Services.AddCors(options =>
 {
@@ -29,15 +38,11 @@ builder.Services.AddCors(options =>
     {
         policy.SetIsOriginAllowed(origin =>
             {
-                if (Uri.TryCreate(origin, UriKind.Absolute, out var uri))
-                {
-                    var isLocal = uri.Host == "localhost" || uri.Host == "127.0.0.1";
-                    if (isLocal) return builder.Environment.IsDevelopment();
+                if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri)) return false;
+                var isLocal = uri.Host is "localhost" or "127.0.0.1";
+                if (isLocal) return builder.Environment.IsDevelopment();
 
-                    return uri.Host == "maddock.world" || uri.Host.EndsWith(".maddock.world");
-                }
-
-                return false;
+                return uri.Host == "maddock.world" || uri.Host.EndsWith(".maddock.world");
             })
             .AllowAnyHeader()
             .AllowAnyMethod()
@@ -45,7 +50,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddSignalR(options => { options.AddFilter<IdentityResolutionFilter>(); });
+builder.Services.AddSignalR(options => { options.AddFilter<HubCallerContextFilter>(); });
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -59,11 +64,9 @@ builder.Services
             OnMessageReceived = context =>
             {
                 var path = context.HttpContext.Request.Path;
-                if (path.StartsWithSegments("/api/gateway"))
-                {
-                    var accessToken = context.Request.Query["access_token"];
-                    if (!string.IsNullOrEmpty(accessToken)) context.Token = accessToken;
-                }
+                if (!path.StartsWithSegments("/api/gateway")) return Task.CompletedTask;
+                var accessToken = context.Request.Query["access_token"];
+                if (!string.IsNullOrEmpty(accessToken)) context.Token = accessToken;
 
                 return Task.CompletedTask;
             }

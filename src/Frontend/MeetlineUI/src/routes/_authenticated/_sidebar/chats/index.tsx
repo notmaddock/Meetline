@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
+  BellIcon,
   MessageCircleQuestionMarkIcon,
   UserRoundSearchIcon,
 } from 'lucide-react'
@@ -13,6 +14,7 @@ import {
   EmptyTitle,
 } from '#/components/ui/empty'
 import { useUniversalSearch } from '#/components/universal-search/UniversalSearch'
+import { handleUserProfileSynced } from '#/lib/gateway/events/UserProfileSynced'
 
 export const Route = createFileRoute('/_authenticated/_sidebar/chats/')({
   component: RouteComponent,
@@ -34,6 +36,11 @@ function RouteComponent() {
           Use the chat list or Universal Search
         </EmptyDescription>
       </EmptyHeader>
+
+      <Button onClick={() => handleUserProfileSynced()}>
+        <BellIcon />
+        Send profile updated notification
+      </Button>
 
       <EmptyContent>
         <Button variant={'secondary'} onClick={() => openUniversalSearch()}>

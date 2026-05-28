@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { ClerkProvider, useAuth, useUser } from '@clerk/react'
-import { Toaster } from 'sonner'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { env } from '#/env.ts'
 import { Spinner } from '#/components/ui/spinner.tsx'
@@ -14,6 +13,7 @@ import {
 } from '#/components/ui/empty.tsx'
 import { routeTree } from './routeTree.gen'
 import { GatewayManager } from './lib/gateway/GatewayManager'
+import { Toasters } from './lib/notifications/toasters'
 import type { RouterContext } from '#/routes/__root.tsx'
 
 const queryClient = new QueryClient()
@@ -51,7 +51,7 @@ if (!rootElement.innerHTML) {
       <QueryClientProvider client={queryClient}>
         <App />
         <GatewayManager />
-        <Toaster theme="dark" position="top-center" />
+        <Toasters />
       </QueryClientProvider>
     </ClerkProvider>,
   )
