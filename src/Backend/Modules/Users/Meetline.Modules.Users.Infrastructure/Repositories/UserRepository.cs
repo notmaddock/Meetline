@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Meetline.Modules.Users.Infrastructure.Repositories;
 
-internal class UserRepository(IUsersDbContext ctx) : IUserRepository
+public class UserRepository(IUsersDbContext ctx) : IUserRepository
 {
     public async Task<User> UpsertByExternalIdAsync(User user, CancellationToken ct)
     {
